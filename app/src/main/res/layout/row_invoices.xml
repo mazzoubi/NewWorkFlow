@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/btn_back4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:weightSum="4"
+        android:id="@+id/lay22"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txvPointName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_back4"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="-"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:gravity="right"
+            android:padding="3dp"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@color/purple_500"
+            android:layout_height="match_parent"
+            android:text="اسم النقطة"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/txvEmpName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_back4"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="-"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView333"
+            android:gravity="right"
+            android:padding="3dp"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@color/purple_500"
+            android:layout_height="match_parent"
+            android:text="انشأت بواسطة"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:weightSum="4"
+        android:id="@+id/lay1"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/lay22"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txvDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_back4"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="-"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:gravity="right"
+            android:padding="3dp"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@color/purple_500"
+            android:layout_height="match_parent"
+            android:text="التاريخ"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/txvChargeRequest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_back4"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="-"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:gravity="right"
+            android:padding="3dp"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@color/purple_500"
+            android:layout_height="match_parent"
+            android:text="رقم الفاتورة"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:weightSum="4"
+        android:id="@+id/lay2"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/lay1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txvLastPayment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_back4"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="-"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:gravity="right"
+            android:padding="3dp"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@color/purple_500"
+            android:layout_height="match_parent"
+            android:text="إجمالي الدفعات"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/txvChargeAmount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_back4"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="-"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:gravity="right"
+            android:padding="3dp"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@color/purple_500"
+            android:layout_height="match_parent"
+            android:text="إجمالي الفاتورة"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:weightSum="2"
+        android:id="@+id/lay3"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/lay2"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txvDate1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_back4"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="-"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:gravity="right"
+            android:padding="3dp"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@color/purple_500"
+            android:layout_height="match_parent"
+            android:text="تاريخ أخر إجراء"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:weightSum="2"
+        android:id="@+id/lay4"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/lay3"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txvName4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_back4"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="-"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:gravity="right"
+            android:padding="3dp"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@color/purple_500"
+            android:layout_height="wrap_content"
+            android:text="نوع الحركة لأخر إجراء"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txvStat"
+        android:gravity="center"
+        android:textSize="22dp"
+        android:layout_width="match_parent"
+        android:fontFamily="serif"
+        android:textStyle="bold"
+        android:layout_below="@+id/lay4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/txvAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvStat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="المبلغ المستحق : 0.0"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
