@@ -3,7 +3,7 @@ package mazzoubi.ldjobs.com.newworkflow.Data.Invoices;
 public class InvoiceModel {
 
     private String CRM_ID="";
-    private String InvoiceState=""; // 1- open     2- subPaid     3- closed     4- overpaid
+    private String invoiceState=""; // 1- open     2- subPaid     3- closed     4- overpaid
     private String invoiceNumber= "" ;
     private String invoiceId= "" ;
     private String invoiceAmount= "" ;
@@ -33,7 +33,7 @@ public class InvoiceModel {
                         String modifiedByUserName, String modifiedByUserId, String modifiedTime, String modifiedDate,
                         String invType , String clientHolderName,String clientHolderId) {
         this.CRM_ID = CRM_ID;
-        InvoiceState = invoiceState;
+        this.invoiceState = invoiceState;
         this.invoiceNumber = invoiceNumber;
         this.invoiceId = invoiceId;
         this.invoiceAmount = invoiceAmount;
@@ -88,11 +88,11 @@ public class InvoiceModel {
     }
 
     public String getInvoiceState() {
-        return InvoiceState;
+        return invoiceState;
     }
 
     public void setInvoiceState(String invoiceState) {
-        InvoiceState = invoiceState;
+        this.invoiceState = invoiceState;
     }
 
     public String getInvoiceNumber() {

@@ -2,6 +2,7 @@ package mazzoubi.ldjobs.com.newworkflow.ViewModel.Clients;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -10,20 +11,26 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
 import mazzoubi.ldjobs.com.newworkflow.Util.ClassAPIs;
+import mazzoubi.ldjobs.com.newworkflow.Util.ClassDate;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomErrorDialog;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomProgressDialog;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomSuccessDialog;
 
 public class ClientsViewModel extends ViewModel {
-
+    private static final String collectionClients = "Clients";
     public MutableLiveData<ArrayList<ClientModel>> listOfClient = new MutableLiveData<>();
 
     public void insertNewClients(Activity c , ClientModel clientModel){
@@ -39,39 +46,57 @@ public class ClientsViewModel extends ViewModel {
             String phone = phoneCorrection(c,clientModel.getClientPhone());
             if (!phone.equals("0")){
                 setProgressDialog(c);
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("ClientEmail" , clientModel.getClientEmail() );
-                    jsonObject.put("ClientName" , clientModel.getClientName() );
-                    jsonObject.put("ClientPhone" , clientModel.getClientPhone() );
-                    jsonObject.put("HolderId" , clientModel.getHolderId() );
-                    jsonObject.put("CrmId" , "" );
 
-                }catch (Exception e){}
+                String key = ClassDate.currentTimeAtMs();
+                Map<String,Object> map = new HashMap<>();
+                map.put("clientName", clientModel.getClientName());
+                map.put("clientPhone", phone);
+                map.put("clientEmail", clientModel.getClientEmail());
+                map.put("holderId", clientModel.getHolderId());
+                map.put("clientId", key);
+                map.put("crm_id", "");
 
-                Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
-                        ClassAPIs.InsertClients, jsonObject, new Response.Listener<JSONObject>() {
+                FirebaseFirestore.getInstance().collection(collectionClients).document(key).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onComplete(@NonNull Task<Void> task) {
                         dismissProgressDialog();
-                        try {
-                            String response_state = response.getString("response_state");
-                            if (response_state.equals("1")){
-                                successDialog(c,response.getString("response_message"));
-                            }else {
-                                errorDialog(c,response.getString("response_message"));
-                            }
-                        }catch (Exception e){
-                            errorDialog(c,"خطأ في عملية الإضافة, الرجاء المحاولة مرة اخرى!");
-                        }
+                        successDialog(c,"تم انشاء العميل بنجاح");
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        dismissProgressDialog();
-                        errorDialog(c,"خطأ في عملية الوصول الى الخادم, الرجاء المحاولة مرة اخرى!");
-                    }
-                }));
+                });
+//                setProgressDialog(c);
+//                JSONObject jsonObject = new JSONObject();
+//                try {
+//                    jsonObject.put("ClientEmail" , clientModel.getClientEmail() );
+//                    jsonObject.put("ClientName" , clientModel.getClientName() );
+//                    jsonObject.put("ClientPhone" , clientModel.getClientPhone() );
+//                    jsonObject.put("HolderId" , clientModel.getHolderId() );
+//                    jsonObject.put("CrmId" , "" );
+//
+//                }catch (Exception e){}
+//
+//                Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
+//                        ClassAPIs.InsertClients, jsonObject, new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        dismissProgressDialog();
+//                        try {
+//                            String response_state = response.getString("response_state");
+//                            if (response_state.equals("1")){
+//                                successDialog(c,response.getString("response_message"));
+//                            }else {
+//                                errorDialog(c,response.getString("response_message"));
+//                            }
+//                        }catch (Exception e){
+//                            errorDialog(c,"خطأ في عملية الإضافة, الرجاء المحاولة مرة اخرى!");
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        dismissProgressDialog();
+//                        errorDialog(c,"خطأ في عملية الوصول الى الخادم, الرجاء المحاولة مرة اخرى!");
+//                    }
+//                }));
             }
 
         }

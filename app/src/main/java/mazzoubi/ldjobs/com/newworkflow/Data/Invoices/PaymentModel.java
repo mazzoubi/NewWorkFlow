@@ -4,12 +4,17 @@ import org.json.JSONObject;
 
 public class PaymentModel {
         private String invoice_id="";
+        private String invoice_no="";
+        private String invoiceAmount="";
         private String user_id="";
         private String user_name="";
+        private String clientName="";
+        private String clientId="";
         private String created_date="";
         private String created_time="";
         private String type="";
         private String amount="";
+        private String invoiceUnpaid="";
         private String payment_type="";
         private String is_deleted="";
         private String payment_id="";
@@ -19,16 +24,22 @@ public class PaymentModel {
 
     public PaymentModel() { }
 
-    public PaymentModel(String invoice_id, String user_id, String user_name, String created_date,
-                        String created_time, String type, String amount,
-                        String payment_type, String is_deleted, String payment_id, String note) {
+    public PaymentModel(String invoice_id,String invoice_no, String invoiceAmount,
+                        String user_id, String user_name, String clientName,
+                        String clientId, String created_date, String created_time, String type, String amount,
+                        String invoiceUnpaid, String payment_type, String is_deleted, String payment_id, String note) {
         this.invoice_id = invoice_id;
+        this.invoice_no = invoice_no;
+        this.invoiceAmount = invoiceAmount;
         this.user_id = user_id;
         this.user_name = user_name;
+        this.clientName = clientName;
+        this.clientId = clientId;
         this.created_date = created_date;
         this.created_time = created_time;
         this.type = type;
         this.amount = amount;
+        this.invoiceUnpaid = invoiceUnpaid;
         this.payment_type = payment_type;
         this.is_deleted = is_deleted;
         this.payment_id = payment_id;
@@ -48,6 +59,47 @@ public class PaymentModel {
         this.payment_id = jsonObject.getString("payment_id");
         this.note = jsonObject.getString("note");
 
+    }
+
+
+    public String getInvoiceAmount() {
+        return invoiceAmount;
+    }
+
+    public void setInvoiceAmount(String invoiceAmount) {
+        this.invoiceAmount = invoiceAmount;
+    }
+
+    public String getInvoiceUnpaid() {
+        return invoiceUnpaid;
+    }
+
+    public void setInvoiceUnpaid(String invoiceUnpaid) {
+        this.invoiceUnpaid = invoiceUnpaid;
+    }
+
+    public String getInvoice_no() {
+        return invoice_no;
+    }
+
+    public void setInvoice_no(String invoice_no) {
+        this.invoice_no = invoice_no;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public String getInvoice_id() {

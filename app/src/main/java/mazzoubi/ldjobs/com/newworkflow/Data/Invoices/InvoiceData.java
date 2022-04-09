@@ -5,42 +5,30 @@ import org.json.JSONObject;
 public class InvoiceData {
     private String createdDate="";
     private String createdTime="";
-    private String createdByEmpId="";
+    private String createdByUserId="";
     private String invType="";
     private String invoiceAmount="";
     private String invoiceId="";
     private String invoiceNo="";
     private String isDeleted="";
-    private String pointId="";
+    private String clientId="";
 
     public InvoiceData() { }
 
-    public InvoiceData(String createdDate, String createdTime, String createdByEmpId, String invType,
-                       String invoiceAmount, String invoiceId, String invoiceNo, String isDeleted,
-                       String pointId) {
+    public InvoiceData(String createdDate, String createdTime,
+                       String createdByUserId, String invType, String invoiceAmount,
+                       String invoiceId, String invoiceNo, String isDeleted, String clientId) {
         this.createdDate = createdDate;
         this.createdTime = createdTime;
-        this.createdByEmpId = createdByEmpId;
+        this.createdByUserId = createdByUserId;
         this.invType = invType;
         this.invoiceAmount = invoiceAmount;
         this.invoiceId = invoiceId;
         this.invoiceNo = invoiceNo;
         this.isDeleted = isDeleted;
-        this.pointId = pointId;
+        this.clientId = clientId;
     }
 
-
-    public InvoiceData(JSONObject jsonObject) throws Exception{
-           this.createdDate = jsonObject.getString("createdDate");
-           this.createdTime = jsonObject.getString("createdTime");
-           this.createdByEmpId = jsonObject.getString("createdByEmpId");
-           this.invType = jsonObject.getString("invType");
-           this.invoiceAmount = jsonObject.getString("invoiceAmount");
-           this.invoiceId = jsonObject.getString("invoiceId");
-           this.invoiceNo = jsonObject.getString("invoiceNo");
-           this.isDeleted = jsonObject.getString("isDeleted");
-           this.pointId = jsonObject.getString("pointId");
-    }
 
     public String getCreatedDate() {
         return createdDate;
@@ -58,12 +46,12 @@ public class InvoiceData {
         this.createdTime = createdTime;
     }
 
-    public String getCreatedByEmpId() {
-        return createdByEmpId;
+    public String getCreatedByUserId() {
+        return createdByUserId;
     }
 
-    public void setCreatedByEmpId(String createdByEmpId) {
-        this.createdByEmpId = createdByEmpId;
+    public void setCreatedByUserId(String createdByUserId) {
+        this.createdByUserId = createdByUserId;
     }
 
     public String getInvType() {
@@ -106,11 +94,11 @@ public class InvoiceData {
         this.isDeleted = isDeleted;
     }
 
-    public String getPointId() {
-        return pointId;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setPointId(String pointId) {
-        this.pointId = pointId;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 }

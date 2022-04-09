@@ -8,17 +8,32 @@
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/drawable-v24/btn_back3.xml" value="0.2703125" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/drawable-v24/btn_back4.xml" value="0.2703125" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/drawable-v24/btn_back5.xml" value="0.2703125" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_accept_exchange.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_add_bank.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_add_new_client.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_add_new_client2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_add_new_invoice.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_add_new_invoice_payment.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_add_new_user.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_collection_report.xml" value="0.264" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_dashboard.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_dashboard2.xml" value="0.264" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_invoice_info.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_manage_invoice.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_new_exchange.xml" value="0.264" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/activity_open_invoice.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/custom_dialog_invoice_log.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/dialog_choose_clients.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/dialog_insert_num.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/dialog_invoice_log.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/error_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/progress_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/row_dashboard.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/row_invoices.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/row_open_invoices.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/row_payments.xml" value="0.4" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/invitations/NewWorkFlow/app/src/main/res/layout/succes_dialog.xml" value="0.25416666666666665" />
       </map>
     </option>

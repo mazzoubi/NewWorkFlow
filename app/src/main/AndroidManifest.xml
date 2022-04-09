@@ -15,6 +15,33 @@
         android:theme="@style/Theme.NewWorkFlow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activities.Invoicecs.InvoiceInfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.UserExchange.AcceptExchangeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.UserExchange.NewExchangeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Invoicecs.ManageInvoiceActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Invoicecs.OpenInvoiceActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Invoicecs.CollectionReportActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Banks.AddBankActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Users.AddNewUserActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activities.Clients.AddNewClientActivity"
             android:exported="true" />
         <activity
@@ -30,7 +57,7 @@
             android:name=".Activities.Main.DashboardActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.Main.Dashboard2Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

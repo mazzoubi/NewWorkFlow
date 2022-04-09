@@ -9,11 +9,12 @@ public class UserModel {
     private String debt = "0" ;
     private String token = "" ;
     private String AID = "" ;
+    private String type = "" ;
 
     public UserModel() { }
 
     public UserModel(String name, String id, String phone, String username
-            , String password, String debt, String token, String AID) {
+            , String password, String debt, String token, String AID,String type) {
         this.name = name;
         this.id = id;
         this.phone = phone;
@@ -22,10 +23,20 @@ public class UserModel {
         this.debt = debt;
         this.token = token;
         this.AID = AID;
+        this.type = type;
     }
 
     public String getAID() {
         return AID;
+    }
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setAID(String AID) {

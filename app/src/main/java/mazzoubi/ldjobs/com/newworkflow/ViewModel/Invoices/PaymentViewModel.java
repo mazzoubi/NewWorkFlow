@@ -1,8 +1,11 @@
 package mazzoubi.ldjobs.com.newworkflow.ViewModel.Invoices;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -15,13 +18,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.InvoiceModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.PaymentModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserModel;
 import mazzoubi.ldjobs.com.newworkflow.Util.ClassAPIs;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomErrorDialog;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomProgressDialog;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomSuccessDialog;
 
-public class PaymentViewModel {
+public class PaymentViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<PaymentModel>>listOfPayments = new MutableLiveData<>();
 
@@ -58,6 +64,21 @@ public class PaymentViewModel {
         }));
     }
 
+    public void addNewInvoicesPayments(Activity c,String clientID,String amount,String paymentType,
+                                       String type ,String bankId){
+        JSONArray jsonArray =new JSONArray();
+        try {
+            JSONObject j = new JSONObject();
+            j.put("ClientID" , clientID);
+            j.put("UserId" , UserInfo.getUser(c).getId());
+            j.put("Type" ,type );
+            j.put("Amount" , amount);
+            j.put("PaymentType" , paymentType);
+            j.put("BankId" , bankId);
+            j.put("Note" , "");
+        }catch (Exception e){}
+    }
+
     public void getPayments(Activity c){
         listOfPayments = new MutableLiveData<>();
         JSONObject jsonObject = new JSONObject();
@@ -90,6 +111,108 @@ public class PaymentViewModel {
         }));
     }
 
+    public void getPaymentsByFilter(Activity c, String dateFrom , String dateTo,
+                                    String userId , String clientId ){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("type","0");
+            jsonObject.put("dateFrom",dateFrom);
+            jsonObject.put("dateTp",dateTo);
+            if (userId.isEmpty()&&clientId.isEmpty()){
+
+            }else if (!userId.isEmpty()&&clientId.isEmpty()){
+                jsonObject.put("userId",userId);
+            }if (userId.isEmpty()&&!clientId.isEmpty()){
+                jsonObject.put("clientId",clientId);
+            }if (!userId.isEmpty()&&!clientId.isEmpty()){
+                jsonObject.put("userId",userId);
+                jsonObject.put("clientId",userId);
+            }
+
+        }catch (Exception e){}
+
+    }
+
+    public void getBankPaymentsByFilter(Activity c, String dateFrom , String dateTo,
+                                    String userId , String clientId ,String bankId){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("type","1");
+            jsonObject.put("dateFrom",dateFrom);
+            jsonObject.put("dateTp",dateTo);
+            if (!bankId.isEmpty()){
+                jsonObject.put("bankId",bankId);
+            }
+            if (userId.isEmpty()&&clientId.isEmpty()){
+
+            }else if (!userId.isEmpty()&&clientId.isEmpty()){
+                jsonObject.put("userId",userId);
+            }if (userId.isEmpty()&&!clientId.isEmpty()){
+                jsonObject.put("clientId",clientId);
+            }if (!userId.isEmpty()&&!clientId.isEmpty()){
+                jsonObject.put("userId",userId);
+                jsonObject.put("clientId",userId);
+            }
+
+        }catch (Exception e){}
+
+    }
+
+    public void getInvoicePayments(Activity c , String dateFrom ,String dateTo, String userId ,
+                                   String clientId , String paymentType){
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("dateFrom",dateFrom);
+            jsonObject.put("dateTo",dateTo);
+            jsonObject.put("userId",userId);
+            jsonObject.put("clientId",clientId);
+            jsonObject.put("paymentType",paymentType);
+        }catch (Exception e){}
+
+
+        {
+
+
+            JSONArray jsonArray = new JSONArray();
+            try {
+                for (int i=0 ; i<jsonArray.length();i++){
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                    try{}catch (Exception e){}
+                }
+            }catch (Exception e){}
+        }
+
+    }
+
+    public void getPaymentByInvoiceId(Activity c , String invId){
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("invoiceId",invId);
+        }catch (Exception e){}
+
+
+    }
+
+    public void deletePayment(Activity c , String paymentId,String userId){
+
+    }
 
     CustomProgressDialog progressDialog;
     void successDialog(Activity c , String message){
@@ -120,6 +243,8 @@ public class PaymentViewModel {
     void dismissProgressDialog(){
         progressDialog.dismiss();
     }
+
+
 
 
 }

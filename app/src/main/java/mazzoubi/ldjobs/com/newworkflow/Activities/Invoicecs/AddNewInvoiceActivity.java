@@ -104,12 +104,13 @@ public class AddNewInvoiceActivity extends AppCompatActivity {
     }
 
     public void onClickAddInv(View view) {
-
+        AddInvoice a = new AddInvoice();
+        a.show();
     }
 
 
-    class addPayment extends Dialog{
-        public addPayment(){
+    class AddInvoice extends Dialog{
+        public AddInvoice(){
             super(activity);
         }
 

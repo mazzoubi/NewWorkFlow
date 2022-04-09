@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">NewWorkFlow</string>
+
+    <array name="user_type">
+        <item>نوع المستخدم</item>
+        <item>مدير نظام</item>
+        <item>مالية</item>
+        <item>مندوب مبيعات</item>
+        <item>موظف خدمة عملاء</item>
+        <item>موظف شحن</item>
+        <item>موظف</item>
+    </array>
 </resources>

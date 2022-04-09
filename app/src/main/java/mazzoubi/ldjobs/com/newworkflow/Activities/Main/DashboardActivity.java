@@ -34,10 +34,10 @@ import mazzoubi.ldjobs.com.newworkflow.ViewModel.Clients.ClientsViewModel;
 public class DashboardActivity extends AppCompatActivity {
 
     GridView gridView ;
-    ArrayList<ActivityModel> activities ;
+    public static ArrayList<ActivityModel> activities ;
     TextView txvUserInfo ;
-    ArrayList<ClientModel> clientsList ;
-    ArrayList<String> strClientsList ;
+    public static ArrayList<ClientModel> clientsList ;
+    public static ArrayList<String> strClientsList ;
     public static ClientModel clientObj ;
     Activity ThisActivity ;
 
