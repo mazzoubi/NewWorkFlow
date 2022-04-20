@@ -55,7 +55,6 @@ public class AcceptExchangeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accept_exchange);
-
         init();
 
 
@@ -120,7 +119,6 @@ public class AcceptExchangeActivity extends AppCompatActivity {
         });
     }
 
-
     public void onClickDateFrom(View view) {
         ClassDate d = ViewModelProviders.of((FragmentActivity) activity).get(ClassDate.class);
         d.showDatePicker(activity);
@@ -131,7 +129,6 @@ public class AcceptExchangeActivity extends AppCompatActivity {
             }
         });
     }
-
     public void onClickDateTo(View view) {
         ClassDate d = ViewModelProviders.of((FragmentActivity) activity).get(ClassDate.class);
         d.showDatePicker(activity);
@@ -142,7 +139,6 @@ public class AcceptExchangeActivity extends AppCompatActivity {
             }
         });
     }
-
     public void onClickSearch(View view) {
         userExchanges = new ArrayList<>();
         String userId = "" ;

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.OpenInvoiceModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserModel;
 import mazzoubi.ldjobs.com.newworkflow.R;
 import mazzoubi.ldjobs.com.newworkflow.ViewModel.UserExchange.UserExchangeViewModel;
@@ -54,12 +55,12 @@ public class NewExchangeActivity extends AppCompatActivity {
 
 
         UserViewModel vm = ViewModelProviders.of((FragmentActivity) c).get(UserViewModel.class);
-        vm.getUserByUsername(c,c.getSharedPreferences("Users", Context.MODE_PRIVATE).getString("username",""));
+        vm.getUserByUsername(c, UserInfo.getUser(c).getUsername());
         vm.userObject.observe((LifecycleOwner) c, new Observer<UserModel>() {
             @Override
             public void onChanged(UserModel userModel) {
                 dept = Double.parseDouble(userModel.getDebt());
-                String ss ="المستخدم الحالي: "+ getSharedPreferences("Users",MODE_PRIVATE).getString("Name","");
+                String ss ="المستخدم الحالي: "+ UserInfo.getUser(c).getName();
                 ss+="\n"+"ذمم المستخدم: "+dept ;
                 txvInfo.setText(ss);
             }
@@ -109,6 +110,7 @@ public class NewExchangeActivity extends AppCompatActivity {
     public void onClickExchange(View view) {
         String toUser = users.get(spinnerUser.getSelectedItemPosition()).getId();
         String amount = edtExchangeAmount.getText().toString();
+        String note = edtNotes.getText().toString();
         if (Double.parseDouble(amount)<=0){
             amount = "" ;
         }
@@ -116,6 +118,6 @@ public class NewExchangeActivity extends AppCompatActivity {
             toUser = "" ;
         }
         UserExchangeViewModel vm = ViewModelProviders.of(this).get(UserExchangeViewModel.class);
-        vm.newExchange(c,getSharedPreferences("Users",MODE_PRIVATE).getString("Id",""),toUser ,amount );
+        vm.newExchange(c,UserInfo.getUser(c).getId(),toUser ,amount ,note);
     }
 }

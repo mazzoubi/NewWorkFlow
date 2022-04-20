@@ -89,7 +89,7 @@ public class AddNewInvoicePaymentActivity extends AppCompatActivity {
             public void onChanged(ArrayList<InvoiceModel> invoiceModels) {
                 for (InvoiceModel d : invoiceModels){
                     invoices.add(d);
-                    dept = Double.parseDouble(d.getInvoiceUnpaid());
+                    dept += Double.parseDouble(d.getInvoiceUnpaid());
                     if (!d.getInvoiceState().equals("3")){
                         openInvCount++;
                     }else {
@@ -134,7 +134,11 @@ public class AddNewInvoicePaymentActivity extends AppCompatActivity {
                     builder.setPositiveButton("تأكيد", new OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            addPayment(clientId,edtValue.getText().toString(),paymentType,type,bankId);
+                            if(Double.parseDouble(edtValue.getText().toString())>dept){
+                                errorDialog(activity,"المبلغ اكبر من قيمة الذمم!");
+                            }else{
+                                addPayment(clientId,edtValue.getText().toString(),paymentType,type,bankId);
+                            }
                         }
                     });
                     builder.setNegativeButton("الغاء", new OnClickListener() {
@@ -143,6 +147,7 @@ public class AddNewInvoicePaymentActivity extends AppCompatActivity {
                             dialogInterface.dismiss();
                         }
                     });
+                    builder.show();
 
                 }
             });

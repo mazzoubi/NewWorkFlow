@@ -15,7 +15,25 @@ public class UserInfo {
         userModel.setToken(sharedPreferences.getString("Token" ,"") );
         userModel.setUsername(sharedPreferences.getString("Username" ,"") );
         userModel.setDebt(sharedPreferences.getString("Debt" ,"") );
+        userModel.setDebt(sharedPreferences.getString("Type" ,"") );
 
         return userModel;
+    }
+
+
+    public static void logout(Activity c){
+
+        SharedPreferences.Editor editor = c.getSharedPreferences("User", Context.MODE_PRIVATE).edit();
+        editor.putString("AID","");
+        editor.putString("Name","");
+        editor.putString("Phone","");
+        editor.putString("Id","");
+        editor.putString("Token","");
+        editor.putString("Username","");
+        editor.putString("Debt","");
+        editor.putString("Type","");
+        editor.apply();
+
+        c.finish();
     }
 }

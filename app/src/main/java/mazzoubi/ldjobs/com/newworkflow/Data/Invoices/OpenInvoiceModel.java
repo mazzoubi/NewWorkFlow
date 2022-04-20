@@ -20,6 +20,7 @@ public class OpenInvoiceModel {
 
 
 
+
     public OpenInvoiceModel() { }
 
     public OpenInvoiceModel(String clientNam, String clientId, String userName,

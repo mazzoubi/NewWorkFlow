@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/tool"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/purple_500"
+        android:layout_height="125dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="serif"
+                android:text="معلومات أكثر عن الزيارة"
+                android:textColor="#ffffff"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/tool"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:id="@+id/lay1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvPointName"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="إسم النقطة"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="16dp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:background="@color/purple_500"
+                android:layout_height="wrap_content"
+                android:text="أسم النقطة"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:id="@+id/lay2"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/lay1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvPhone"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="أسم النقطة"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="16dp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:background="@color/purple_500"
+                android:layout_height="wrap_content"
+                android:text="رقم النقطة التعريفي"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:layout_below="@+id/lay2"
+            android:id="@+id/lay3"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvSumUnpaid"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="إسم النقطة"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:background="@color/purple_500"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:text="تاريخ فتح الفاتورة"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:id="@+id/lay4"
+            android:layout_below="@+id/lay3"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvClosedInvoice"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="إسم النقطة"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="16dp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:background="@color/purple_500"
+                android:layout_height="wrap_content"
+                android:text="وقت فتح الفاتورة"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:id="@+id/lay5"
+            android:layout_below="@+id/lay4"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvOpenInvoice"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="إسم النقطة"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:background="@color/purple_500"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:text="قيمة الفاتورة"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:id="@+id/lay7"
+            android:layout_below="@+id/lay5"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvOpenInvoice7"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="إسم النقطة"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView97"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="16dp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:background="@color/purple_500"
+                android:layout_height="wrap_content"
+                android:text="قيمة الذمم للنقطة"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:id="@+id/lay8"
+            android:layout_below="@+id/lay7"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvOpenInvoice8"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="الإتصال"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView98"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="16dp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:background="@color/purple_500"
+                android:layout_height="wrap_content"
+                android:text="رقم تعريفي فيربيس"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:id="@+id/lay81"
+            android:layout_below="@+id/lay8"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvOpenInvoice81"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="الإتصال"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView981"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="16dp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:background="@color/purple_500"
+                android:layout_height="wrap_content"
+                android:text="رقم تعريفي دفترة"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:id="@+id/lay82"
+            android:layout_below="@+id/lay81"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvOpenInvoice82"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="الإتصال"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView982"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="16dp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:background="@color/purple_500"
+                android:layout_height="wrap_content"
+                android:text="إسم المندوب"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:weightSum="12"
+            android:id="@+id/lay83"
+            android:layout_below="@+id/lay82"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txvOpenInvoice83"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="16dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/btn_back4"
+                android:text="الإتصال"
+                android:textColor="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/textView983"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="16dp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:background="@color/purple_500"
+                android:layout_height="wrap_content"
+                android:text="رقم الفاتورة"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/acc_note"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:hint="ملاحظة القبول"
+            android:layout_below="@+id/lay83"
+            android:background="@drawable/btn_back"
+            android:textColor="@color/purple_500"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/purple_500" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/acc_note"
+            android:textStyle="bold"
+            android:fontFamily="serif"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn_back2"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:text="قبول"
+            android:textColor="@color/cardview_light_background" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

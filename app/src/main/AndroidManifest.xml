@@ -15,6 +15,9 @@
         android:theme="@style/Theme.NewWorkFlow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activities.Clients.ManageClientsActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activities.Invoicecs.InvoiceInfoActivity"
             android:exported="true" />
         <activity
@@ -39,7 +42,7 @@
             android:name=".Activities.Users.AddNewUserActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.Main.Dashboard2Activity"
             android:exported="true" />
         <activity
             android:name=".Activities.Clients.AddNewClientActivity"
@@ -57,7 +60,7 @@
             android:name=".Activities.Main.DashboardActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.Main.Dashboard2Activity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -24,7 +24,10 @@ import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.Adapters.adapterInvo
 import mazzoubi.ldjobs.com.newworkflow.Activities.Main.DashboardActivity;
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.InvoiceModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.OpenInvoiceModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.R;
+import mazzoubi.ldjobs.com.newworkflow.Util.ClassDate;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomErrorDialog;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomProgressDialog;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomSuccessDialog;
@@ -86,9 +89,10 @@ public class AddNewInvoiceActivity extends AppCompatActivity {
             public void onChanged(ArrayList<InvoiceModel> invoiceModels) {
                 for (InvoiceModel d : invoiceModels){
                     invoices.add(d);
-                    dept = Double.parseDouble(d.getInvoiceUnpaid());
+                    dept += Double.parseDouble(d.getInvoiceUnpaid());
                     if (!d.getInvoiceState().equals("3")){
                         openInvCount++;
+                        unPaidInvoices.add(d);
                     }else {
                         closeInvCount++;
                     }
@@ -133,17 +137,41 @@ public class AddNewInvoiceActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             if(openInvCount> (Integer.parseInt(client.getMax_inv())+1)){
                                 errorDialog(activity,"خطأ في عملية الاضافة لقد تجاوزت سقف الفواتير المسموح به الذي يساوي "+client.getMax_inv() + " فواتير ");
-                            }else if(dept>Double.parseDouble(edtValue.getText().toString())){
+                            }else if((dept+Double.parseDouble(edtValue.getText().toString()))>Double.parseDouble(client.getMax_debt())){
                                 errorDialog(activity,"خطأ في عملية الاضافة لقد تجاوزت سقف الذمم المسموح به الذي يساوي "+client.getMax_debt() + " دينار ");
                             }else {
                                 InvoiceModel inv = new InvoiceModel();
                                 InvoiceViewModel c = ViewModelProviders.of((FragmentActivity) activity).get(InvoiceViewModel.class);
 
+                                String a = "[" ;
+                                for (int ii=0 ;ii<unPaidInvoices.size();ii++ ){
+                                    if (ii!=0){
+                                        a+=",";
+                                    }
+                                    a+="{\\\"unpaid\\\":\\\""+
+                                            "الفاتورة رقم: "+unPaidInvoices.get(ii).getInvoiceNumber()+
+                                            " والمتبقي منها "+unPaidInvoices.get(ii).getInvoiceUnpaid()+" دينار"
+                                            +"\\\"}" ;
+                                }
+                                a+="]";
+                                String sharedBody="{" +
+                                        "\\\"clientName\\\":\\\""+clientName+"\\\"," +
+                                        "\\\"invAmount\\\":\\\""+edtValue.getText().toString()+" دينار"+"\\\"," +
+                                        "\\\"date\\\":\\\""+ ClassDate.date()+"\\\"," +
+                                        "\\\"time\\\":\\\""+ClassDate.time()+"\\\"," +
+                                        "\\\"debt\\\":\\\""+(dept+Double.parseDouble(edtValue.getText().toString()))+"\\\"," +
+                                        "\\\"lastInv\\\":"+a+"," +
+                                        "\\\"unPaidCount\\\":\\\""+(openInvCount+1)+"\\\"," +
+                                        "\\\"userName\\\":\\\""+ UserInfo.getUser(activity).getName() +"\\\""+
+                                        "}";
                                 inv.setInvoiceAmount(edtValue.getText().toString());
                                 inv.setInvType("1");
                                 inv.setCreatedByUserId(getSharedPreferences("User",MODE_PRIVATE).getString("Id",""));
                                 inv.setClientId(clientId);
+                                c.addInvoice(activity,inv,sharedBody);
                             }
+
+
                         }
                     });
                     builder.setNegativeButton("الغاء", new OnClickListener() {
@@ -152,6 +180,8 @@ public class AddNewInvoiceActivity extends AppCompatActivity {
                             dialogInterface.dismiss();
                         }
                     });
+
+                    builder.show();
 
                 }
             });

@@ -8,24 +8,42 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.Adapters.AdapterOpenInvoice;
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.OpenInvoiceModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.PaymentModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserModel;
 import mazzoubi.ldjobs.com.newworkflow.R;
 import mazzoubi.ldjobs.com.newworkflow.Util.ClassDate;
@@ -64,7 +82,6 @@ public class OpenInvoiceActivity extends AppCompatActivity {
 
                                 try {
                                     Intent intent = new Intent(Intent.ACTION_SEND);
-
                                     intent.setType("text/plain");
                                     intent.putExtra(Intent.EXTRA_SUBJECT, "Share");
                                     intent.putExtra(Intent.EXTRA_TEXT, openInvoices.get(x).getSharedBody());
@@ -101,6 +118,17 @@ public class OpenInvoiceActivity extends AppCompatActivity {
                 }).show();
 
                 return true;
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (!UserInfo.getUser(OpenInvoiceActivity.this).getType().equals("3")){
+                    AcceptCharge a = new AcceptCharge(OpenInvoiceActivity.this,
+                            openInvoices,i);
+                    a.show();
+                }
             }
         });
 
@@ -208,6 +236,7 @@ public class OpenInvoiceActivity extends AppCompatActivity {
     }
 
     public void onClickSearch(View view) {
+        Toast.makeText(activity, "", Toast.LENGTH_SHORT).show();
         openInvoices = new ArrayList<>();
         strOpenInvoices = new ArrayList<>();
         OpenInvoiceViewModel vm = ViewModelProviders.of((FragmentActivity) activity).get(OpenInvoiceViewModel.class);
@@ -237,7 +266,7 @@ public class OpenInvoiceActivity extends AppCompatActivity {
             }
         }
 
-        vm.getPaymentsByFilter(activity,txvDateFrom.getText().toString(),txvDateTo.getText().toString(),ss, cc);
+        vm.getOpenInvoiceByFilter(activity,txvDateFrom.getText().toString(),txvDateTo.getText().toString(),ss, cc);
         vm.listOfOpenInvoice.observe(this, new Observer<ArrayList<OpenInvoiceModel>>() {
             @Override
             public void onChanged(ArrayList<OpenInvoiceModel> openInvoiceModels) {
@@ -250,5 +279,92 @@ public class OpenInvoiceActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
             }
         });
+    }
+
+
+
+    public class AcceptCharge extends Dialog {
+        public Activity c;
+        public Dialog d;
+
+        ArrayList<OpenInvoiceModel> list;
+
+        Button btnok;
+
+        TextView t1, t2, t3, t4, t5, t6, t7, t8, t9, t10;
+        int pos = 0;
+        EditText et;
+
+        public AcceptCharge(Activity a, ArrayList<OpenInvoiceModel> list, int pos) {
+            super(a);
+            // TODO Auto-generated constructor stub
+            this.c = a;
+            this.list = list;
+            this.pos = pos;
+
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            setContentView(R.layout.dialog_open_invoice);
+            init();
+
+
+        }
+
+
+        void init() {
+            btnok = findViewById(R.id.btnAdd);
+            t1 = findViewById(R.id.txvPointName);
+            t2 = findViewById(R.id.txvPhone);
+            t3 = findViewById(R.id.txvSumUnpaid);
+            t4 = findViewById(R.id.txvClosedInvoice);
+            t5 = findViewById(R.id.txvOpenInvoice);
+            t6 = findViewById(R.id.txvOpenInvoice7);
+            t7 = findViewById(R.id.txvOpenInvoice8);
+            t8 = findViewById(R.id.txvOpenInvoice81);
+            t9 = findViewById(R.id.txvOpenInvoice82);
+            t10 = findViewById(R.id.txvOpenInvoice83);
+
+            et = findViewById(R.id.acc_note);
+
+            t1.setText(list.get(pos).getClientNam());
+            t2.setText(list.get(pos).getClientId());
+            t3.setText(list.get(pos).getDate());
+            t4.setText(list.get(pos).getTime());
+            t5.setText(list.get(pos).getInvoiceAmount());
+            t6.setText(list.get(pos).getPointDept());
+            t7.setText(list.get(pos).getId());
+            t8.setText(list.get(pos).getId());
+            t9.setText(list.get(pos).getUserName());
+            t10.setText(list.get(pos).getInvoiceNo());
+
+            if(!list.get(pos).getState().equals("-1")){
+                et.setText(list.get(pos).getChargeState());
+                btnok.setText("تعديل");
+            }
+
+
+
+            btnok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(!et.getText().toString().equals("")){
+                        list.get(pos).setChargeState(et.getText().toString());
+
+                        OpenInvoiceViewModel a = ViewModelProviders.of(OpenInvoiceActivity.this).get(OpenInvoiceViewModel.class);
+                        a.acceptOpenInv(OpenInvoiceActivity.this,list.get(pos));
+                    }
+                    else{
+                        Toast.makeText(c, "الرجاء عدم ترك حقول فارغة", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            });
+
+        }
     }
 }

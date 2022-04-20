@@ -10,12 +10,17 @@ public class InvoiceLogModel {
     private String clientName ="";
     private String invoiceId ="";
     private String description ="";
+    private String invoice_state_after_trans ="";
+    private String is_deleted ="";
     private String type ="";         // 1- created    2-add payment   3-delete payment   4-deleted   5- updated
 
     public InvoiceLogModel() {}
 
     public InvoiceLogModel(String id, String userId, String userName, String date, String time,
-                           String clientId, String clientName, String invoiceId, String description, String type) {
+                           String clientId, String clientName, String invoiceId, String description,
+                           String type , String invoice_state_after_trans,String is_deleted) {
+        this.is_deleted=is_deleted;
+        this.invoice_state_after_trans=invoice_state_after_trans;
         this.id = id;
         this.userId = userId;
         this.userName = userName;
@@ -26,6 +31,22 @@ public class InvoiceLogModel {
         this.invoiceId = invoiceId;
         this.description = description;
         this.type = type;
+    }
+
+    public String getInvoice_state_after_trans() {
+        return invoice_state_after_trans;
+    }
+
+    public void setInvoice_state_after_trans(String invoice_state_after_trans) {
+        this.invoice_state_after_trans = invoice_state_after_trans;
+    }
+
+    public String getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(String is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public String getId() {

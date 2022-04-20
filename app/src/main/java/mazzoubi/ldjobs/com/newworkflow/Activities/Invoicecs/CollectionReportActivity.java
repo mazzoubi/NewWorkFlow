@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,7 @@ public class CollectionReportActivity extends AppCompatActivity {
     CheckBox checkBoxIsBank;
     ListView listView;
     Activity activity ;
-
+    Button btnSearch ;
     ArrayList<PaymentModel> payments ;
     ArrayList<String> strPayments ;
 
@@ -46,14 +48,20 @@ public class CollectionReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_report);
         init();
-
-
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(activity, "", Toast.LENGTH_SHORT).show();
+                onClickSearch();
+            }
+        });
     }
 
     void init(){
         activity = CollectionReportActivity.this;
         txvDateFrom = findViewById(R.id.txvDateFrom);
         txvDateTo = findViewById(R.id.txvDateTo);
+        btnSearch = findViewById(R.id.textView6);
         txvSum = findViewById(R.id.txvSum);
         spinnerBankName = findViewById(R.id.edtBankName);
         spinnerUser = findViewById(R.id.spinnerUser);
@@ -65,9 +73,6 @@ public class CollectionReportActivity extends AppCompatActivity {
         txvDateFrom.setText(ClassDate.date());
 
         getUsers();
-        getClients();
-        getBanks();
-
 
     }
 
@@ -92,6 +97,7 @@ public class CollectionReportActivity extends AppCompatActivity {
                 }
                 ArrayAdapter<String>adapter = new ArrayAdapter<>(activity, android.R.layout.simple_list_item_1,strBanks);
                 spinnerBankName.setAdapter(adapter);
+                getClients();
             }
         });
     }
@@ -130,12 +136,15 @@ public class CollectionReportActivity extends AppCompatActivity {
                 }
                 ArrayAdapter<String>adapter = new ArrayAdapter<>(activity, android.R.layout.simple_list_item_1,strUsers);
                 spinnerUser.setAdapter(adapter);
+                getBanks();
             }
         });
     }
 
     ArrayList<ClientModel> clients ;
     ArrayList<String> strClients ;
+
+
     void getClients(){
         clients = new ArrayList<>();
         strClients = new ArrayList<>();
@@ -177,7 +186,7 @@ public class CollectionReportActivity extends AppCompatActivity {
     }
 
 
-    public void onClickSearch(View view) {
+    public void onClickSearch() {
         payments=new ArrayList<>();
         strPayments=new ArrayList<>();
         PaymentViewModel vm = ViewModelProviders.of((FragmentActivity) activity).get(PaymentViewModel.class);

@@ -23,6 +23,8 @@ public class InvoiceModel {
     private String invType= "" ;
     private String clientHolderName= "" ;
     private String clientHolderId= "" ;
+    private String isDeleted= "" ;
+    private String note= "" ;
 
     public InvoiceModel() { }
 
@@ -31,7 +33,7 @@ public class InvoiceModel {
                         String invoiceUnpaid, String clientId, String clientName, String clientPhone,
                         String createdByUserName, String createdByUserId, String createdDate, String createdTime,
                         String modifiedByUserName, String modifiedByUserId, String modifiedTime, String modifiedDate,
-                        String invType , String clientHolderName,String clientHolderId) {
+                        String invType , String clientHolderName,String clientHolderId,String isDeleted,String note) {
         this.CRM_ID = CRM_ID;
         this.invoiceState = invoiceState;
         this.invoiceNumber = invoiceNumber;
@@ -53,6 +55,24 @@ public class InvoiceModel {
         this.invType = invType;
         this.clientHolderName = clientHolderName;
         this.clientHolderId = clientHolderId;
+        this.isDeleted = isDeleted;
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(String isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public String getClientHolderId() {

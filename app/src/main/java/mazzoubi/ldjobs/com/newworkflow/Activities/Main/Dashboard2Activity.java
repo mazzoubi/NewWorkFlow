@@ -19,13 +19,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import mazzoubi.ldjobs.com.newworkflow.Activities.Banks.AddBankActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Clients.AddNewClientActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.AddNewInvoiceActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.AddNewInvoicePaymentActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.CollectionReportActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.ManageInvoiceActivity;
+import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.OpenInvoiceActivity;
+import mazzoubi.ldjobs.com.newworkflow.Activities.UserExchange.AcceptExchangeActivity;
+import mazzoubi.ldjobs.com.newworkflow.Activities.UserExchange.NewExchangeActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Users.AddNewUserActivity;
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.R;
 import mazzoubi.ldjobs.com.newworkflow.ViewModel.Clients.ClientsViewModel;
 
@@ -83,6 +88,30 @@ public class Dashboard2Activity extends AppCompatActivity {
 
     public void onClickManageInvoice(View view) {
         startActivity(new Intent(getApplicationContext(), ManageInvoiceActivity.class));
+    }
+
+    public void onClickAddBank(View view) {
+        startActivity(new Intent(getApplicationContext(), AddBankActivity.class));
+    }
+
+    public void onClickCreateUserExchange(View view) {
+        startActivity(new Intent(getApplicationContext(), NewExchangeActivity.class));
+    }
+
+    public void onClickAcceptUserExchange(View view) {
+        startActivity(new Intent(getApplicationContext(), AcceptExchangeActivity.class));
+    }
+
+    public void onClickManageClients(View view) {
+        startActivity(new Intent(getApplicationContext(), AcceptExchangeActivity.class));
+    }
+
+    public void onClickLogout(View view) {
+        UserInfo.logout(Dashboard2Activity.this);
+    }
+
+    public void onClickOpenInvoice(View view) {
+        startActivity(new Intent(getApplicationContext(), OpenInvoiceActivity.class));
     }
 
 

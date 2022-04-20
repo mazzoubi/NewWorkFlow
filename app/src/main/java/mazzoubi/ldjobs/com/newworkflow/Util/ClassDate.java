@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ClassDate extends ViewModel {
-    public MutableLiveData<String> datePicker = new MutableLiveData<>();
+
     public static String date(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("M-yyyy",new Locale("EN"));
         int day = new Date().getDate();
@@ -38,7 +38,7 @@ public class ClassDate extends ViewModel {
         return System.currentTimeMillis()+"";
     }
 
-
+    public MutableLiveData<String> datePicker = new MutableLiveData<>();
    public void showDatePicker(Activity c){
         datePicker = new MutableLiveData<>();
         final String[] dateTo = new String[1];

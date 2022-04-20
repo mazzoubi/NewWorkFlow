@@ -2,6 +2,8 @@ package mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -42,6 +44,7 @@ import java.util.Locale;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.Adapters.adapterInvoices2;
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.InvoiceModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserModel;
 import mazzoubi.ldjobs.com.newworkflow.R;
 import mazzoubi.ldjobs.com.newworkflow.Util.ClassDate;
@@ -93,29 +96,7 @@ public class ManageInvoiceActivity extends AppCompatActivity {
             }
         });
 
-        invoicesViewModel.listOfInvoices.observe(this, new Observer<ArrayList<InvoiceModel>>() {
-            @Override
-            public void onChanged(ArrayList<InvoiceModel> classInvoice2s) {
-                invoices=classInvoice2s;
 
-                double sumUnpaid = 0 ;
-                double sumPaid = 0;
-                double sumTotal = 0 ;
-                int invCount = 0 ;
-                for(InvoiceModel d : classInvoice2s){
-                    sumUnpaid += Double.parseDouble(d.getInvoiceUnpaid());
-                    sumPaid += Double.parseDouble(d.getInvoicePaid());
-                    sumTotal += Double.parseDouble(d.getInvoiceAmount());
-                    invCount++;
-                }
-                ArrayAdapter<InvoiceModel> adapter = new adapterInvoices2(getApplicationContext(),R.layout.row_invoices,classInvoice2s);
-                listView.setAdapter(adapter);
-                txvSumUnpaid.setText("عدد الفواتير: "+invCount+"\n"+"المجموع الاجمالي: "+sumTotal+"\n"+"مجموع الغير مدفوع: "+sumUnpaid+"\n"+"مجموع المدفوعات: "+sumPaid);
-                progressDialog.dismiss();
-
-
-            }
-        });
         txvShowOrCloseFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,7 +129,6 @@ public class ManageInvoiceActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.show();
                 String pointId = "" ;
                 for (int i =0 ; i<clients.size();i++){
                     if (aCPoint.getText().toString().equals(clients.get(i).getClientName())){
@@ -156,13 +136,41 @@ public class ManageInvoiceActivity extends AppCompatActivity {
                         break;
                     }
                 }
+                if (!pointId.isEmpty()){
+                    invoicesViewModel.getInvoicesByClintId2(ManageInvoiceActivity.this,pointId);
+                    setListInv();
+                }
 
                 if (checkBox.isChecked()&& !aCPoint.getText().toString().isEmpty()){
                     invoicesViewModel.getInvoicesByClintId(ManageInvoiceActivity.this,pointId+"");
                 }else {
+
+                    String clientId = "" ;
+                    if (!aCPoint.getText().toString().isEmpty()){
+                        for (ClientModel d:clients){
+                            if (aCPoint.getText().toString().equals(d.getClientName())){
+                                clientId=d.getClientId();
+                                break;
+                            }
+                        }
+                    }
+
+
+                    String userId = "" ;
+                    if (!aCEmpName.getText().toString().isEmpty()){
+                        for (UserModel d:employees){
+                            if (aCEmpName.getText().toString().equals(d.getName())){
+                                userId=d.getId();
+                                break;
+                            }
+                        }
+                    }
                     invoicesViewModel.getInvoiceByFilter(ManageInvoiceActivity.this ,aCInvNo.getText().toString(),dateFrom,dateTo,
-                            pointId,aCEmpName.getText().toString(),rbCreated.isChecked(),rbPaid.isChecked(),
+                            clientId,userId,rbCreated.isChecked(),rbPaid.isChecked(),
                             rbPartiallyPaid.isChecked(),rbAll.isChecked(),rbAllUnpaid.isChecked(),false);
+                    setListInv();
+
+
                 }
 
             }
@@ -174,11 +182,11 @@ public class ManageInvoiceActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 invObject = new InvoiceModel();
                 invObject = invoices.get(position);
-                if (!getSharedPreferences("User",MODE_PRIVATE).getString("Type", "-").equals("0")
-                ||!getSharedPreferences("User",MODE_PRIVATE).getString("Type", "-").equals("1")){
-
+                if (!UserInfo.getUser(ManageInvoiceActivity.this).getType().equals("0")
+                ||!UserInfo.getUser(ManageInvoiceActivity.this).getType().equals("1")){
+                    startActivity(new Intent(getApplicationContext(),InvoiceInfoActivity.class));
                 }else {
-                    startActivity(new Intent(getApplicationContext(),ManageInvoiceActivity.class));
+                    startActivity(new Intent(getApplicationContext(),InvoiceInfoActivity.class));
                 }
 
             }
@@ -224,8 +232,7 @@ public class ManageInvoiceActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(ManageInvoiceActivity.this);
         progressDialog.setTitle("الرجاء الانتظار...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
 
         btnSearch = findViewById(R.id.btnSearch);
 
@@ -235,71 +242,92 @@ public class ManageInvoiceActivity extends AppCompatActivity {
             cardView.setVisibility(View.VISIBLE);
             filterIsClosed=false;
         }
+
+
+
         getAllClient();
         getAllEmp();
 
+//        setListInv();
 //        getInvoiceByFilter();
 
 
 
     }
 
-    void getAllEmp(){
-     employees = new ArrayList<>();
-     ArrayList<String>strEmployees = new ArrayList<>();
-     UserViewModel vm = ViewModelProviders.of(this).get(UserViewModel.class);
-     vm.getUsers(ManageInvoiceActivity.this);
-        vm.listUsers.observe(this, new Observer<ArrayList<UserModel>>() {
+    void setListInv(){
+        invoicesViewModel.listOfInvoices.observe(this, new Observer<ArrayList<InvoiceModel>>() {
             @Override
-            public void onChanged(ArrayList<UserModel> userModels) {
-                for (UserModel d: userModels){
-                    employees.add(d);
-                    strEmployees.add(d.getName());
+            public void onChanged(ArrayList<InvoiceModel> classInvoice2s) {
+                invoices=classInvoice2s;
+
+                double sumUnpaid = 0 ;
+                double sumPaid = 0;
+                double sumTotal = 0 ;
+                int invCount = 0 ;
+                for(InvoiceModel d : classInvoice2s){
+                    sumUnpaid += Double.parseDouble(d.getInvoiceUnpaid());
+                    sumPaid += Double.parseDouble(d.getInvoicePaid());
+                    sumTotal += Double.parseDouble(d.getInvoiceAmount());
+                    invCount++;
                 }
+                ArrayAdapter<InvoiceModel> adapter = new adapterInvoices2(getApplicationContext(),R.layout.row_invoices,classInvoice2s);
+                listView.setAdapter(adapter);
+                txvSumUnpaid.setText("عدد الفواتير: "+invCount+"\n"+"المجموع الاجمالي: "+sumTotal+"\n"+"مجموع الغير مدفوع: "+sumUnpaid+"\n"+"مجموع المدفوعات: "+sumPaid);
+                progressDialog.dismiss();
+
+
             }
         });
     }
 
+    void getAllEmp(){
+     employees = new ArrayList<>();
+     ArrayList<String>strEmployees = new ArrayList<>();
+     if (UserInfo.getUser(ManageInvoiceActivity.this).getType().equals("3")){
+         employees.add(UserInfo.getUser(ManageInvoiceActivity.this));
+         strEmployees.add(UserInfo.getUser(ManageInvoiceActivity.this).getName());
+         aCEmpName.setText(UserInfo.getUser(ManageInvoiceActivity.this).getName());
+         aCEmpName.setEnabled(false);
+     }else {
+         UserViewModel vm = ViewModelProviders.of(this).get(UserViewModel.class);
+         vm.getUsers(ManageInvoiceActivity.this);
+         vm.listUsers.observe(this, new Observer<ArrayList<UserModel>>() {
+             @Override
+             public void onChanged(ArrayList<UserModel> userModels) {
+                 for (UserModel d: userModels){
+                     employees.add(d);
+                     strEmployees.add(d.getName());
+                 }
+                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,strEmployees);
+                 aCEmpName.setAdapter(adapter);
+             }
+         });
+     }
+    }
+
     void showDateFrom(){
-        final Calendar myCalendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener date_ = new DatePickerDialog.OnDateSetListener() {
-
+        ClassDate d = ViewModelProviders.of((FragmentActivity) ManageInvoiceActivity.this).get(ClassDate.class);
+        d.showDatePicker(ManageInvoiceActivity.this);
+        d.datePicker.observe((LifecycleOwner) ManageInvoiceActivity.this, new Observer<String>() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                String myFormat = "d-M-yyyy"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-                dateFrom=sdf.format(myCalendar.getTime());
-                txvDateFrom.setText("التاريخ من: "+dateFrom);
-
-            } };
-        new DatePickerDialog(ManageInvoiceActivity.this, date_, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            public void onChanged(String s) {
+                dateFrom=s;
+                txvDateFrom.setText("التاريخ من: "+s);
+            }
+        });
     }
 
     void showDateTo(){
-        final Calendar myCalendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener date_ = new DatePickerDialog.OnDateSetListener() {
-
+        ClassDate d = ViewModelProviders.of((FragmentActivity) ManageInvoiceActivity.this).get(ClassDate.class);
+        d.showDatePicker(ManageInvoiceActivity.this);
+        d.datePicker.observe((LifecycleOwner) ManageInvoiceActivity.this, new Observer<String>() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                String myFormat = "d-M-yyyy"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-                dateTo=sdf.format(myCalendar.getTime());
-                txvDateTo.setText("الى: "+dateTo);
-
-            } };
-        new DatePickerDialog(ManageInvoiceActivity.this, date_, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            public void onChanged(String s) {
+                dateTo=s;
+                txvDateTo.setText("التاريخ من: "+s);
+            }
+        });
     }
 
     void getAllClient(){
@@ -320,10 +348,19 @@ public class ManageInvoiceActivity extends AppCompatActivity {
 
             }
         });
-
+        String clientId = "" ;
+        if (!aCPoint.getText().toString().isEmpty()){
+            for (ClientModel d:clients){
+                if (aCPoint.getText().toString().equals(d.getClientName())){
+                    clientId=d.getClientId();
+                    break;
+                }
+            }
+        }
         invoicesViewModel.getInvoiceByFilter(ManageInvoiceActivity.this ,aCInvNo.getText().toString(),dateFrom,dateTo,
-                aCPoint.getText().toString(),aCEmpName.getText().toString(),rbCreated.isChecked(),rbPaid.isChecked(),
+                clientId,aCEmpName.getText().toString(),rbCreated.isChecked(),rbPaid.isChecked(),
                 rbPartiallyPaid.isChecked(),rbAll.isChecked(),rbAllUnpaid.isChecked(),false);
+        setListInv();
     }
 
     public class CustomDialogVisitInfo extends Dialog {

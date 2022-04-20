@@ -47,6 +47,8 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         ThisActivity = DashboardActivity.this;
         init();
+        startActivity(new Intent(getApplicationContext(),Dashboard2Activity.class));
+        finish();
     }
 
     void init(){

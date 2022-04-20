@@ -56,56 +56,39 @@ public class UserViewModel extends ViewModel {
         }else if (userModel.getType().isEmpty()){
             errorDialog(c,"الرجاء ادخال نوع المستخدم!");
         }else {
-            String key = ClassDate.currentTimeAtMs();
-            Map<String,Object>map =new HashMap<>();
-            map.put("name" ,userModel.getName() );
-            map.put("username" ,userModel.getUsername() );
-            map.put("phone" ,userModel.getPhone() );
-            map.put("password" , userModel.getPassword());
-            map.put("type" ,userModel.getType() );
-            map.put("id" ,key );
-
 
             setProgressDialog(c);
-            FirebaseFirestore.getInstance().collection(collectionUsers).document(key).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    dismissProgressDialog();
-                    successDialog(c,"تمت اضافة المستخدم بنجاح");
-                }
-            });
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("Name", userModel.getName() );
+                jsonObject.put("Username", userModel.getUsername() );
+                jsonObject.put("Phone", userModel.getPhone() );
+                jsonObject.put("Password", userModel.getPassword() );
+                jsonObject.put("Type", userModel.getType() );
+            }catch (Exception e ){}
 
-//            setProgressDialog(c);
-//            JSONObject jsonObject = new JSONObject();
-//            try {
-//                jsonObject.put("Name", userModel.getName() );
-//                jsonObject.put("Username", userModel.getUsername() );
-//                jsonObject.put("Phone", userModel.getPhone() );
-//                jsonObject.put("Password", userModel.getPassword() );
-//            }catch (Exception e ){}
-//
-//            Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
-//                    ClassAPIs.InsertUser, jsonObject, new Response.Listener<JSONObject>() {
-//                @Override
-//                public void onResponse(JSONObject response) {
-//                    dismissProgressDialog();
-//                    try {
-//                        if (response.getString("response_state").equals("1")){
-//                            successDialog(c,response.getString("response_message"));
-//                        }else {
-//                            errorDialog(c,response.getString("response_message"));
-//                        }
-//                    }catch (Exception e){
-//                        errorDialog(c,"خطأ في عملية الإضافة الرجاء المحاولة مرة اخرى!");
-//                    }
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    dismissProgressDialog();
-//                    errorDialog(c,"تعذر الوصول الى الخادم الرجاء المحاولة مرة اخرى!");
-//                }
-//            }));
+            Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
+                    ClassAPIs.InsertUser, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    dismissProgressDialog();
+                    try {
+                        if (response.getString("response_state").equals("1")){
+                            successDialog(c,response.getString("response_message"));
+                        }else {
+                            errorDialog(c,response.getString("response_message"));
+                        }
+                    }catch (Exception e){
+                        errorDialog(c,"خطأ في عملية الإضافة الرجاء المحاولة مرة اخرى!");
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    dismissProgressDialog();
+                    errorDialog(c,"تعذر الوصول الى الخادم الرجاء المحاولة مرة اخرى!");
+                }
+            }));
 
 
         }
@@ -114,7 +97,6 @@ public class UserViewModel extends ViewModel {
     public void getUsers(Activity c ){
         listUsers = new MutableLiveData<>();
         ArrayList<UserModel> temp = new ArrayList<>();
-        setProgressDialog(c);
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -175,6 +157,7 @@ public class UserViewModel extends ViewModel {
                         }
                         temp.add(a);
                     }
+                    dismissProgressDialog();
                     listUsers.setValue(temp);
 
                 }catch (Exception e){
@@ -212,8 +195,9 @@ public class UserViewModel extends ViewModel {
                         UserModel a = new UserModel();
                         JSONArray data = response.getJSONArray("data");
 
-                        try { a.setDebt(data.getJSONObject(0).getString("debt")) ;
+                        try { a.setDebt(Double.parseDouble(data.getJSONObject(0).getString("debt"))+"") ;
                         }catch (Exception e){
+                            a.setDebt("0");
                             // errorDialog(c,""+"\n"+e.toString());
                         }
 
@@ -336,6 +320,7 @@ public class UserViewModel extends ViewModel {
                             // errorDialog(c,""+"\n"+e.toString());
                         }
 
+                        updateUser(c,a);
                         login.setValue(a);
                         c.startActivity(new Intent(c, DashboardActivity.class));
                         SharedPreferences.Editor editor= c.getSharedPreferences("User", Context.MODE_PRIVATE).edit();
@@ -348,6 +333,7 @@ public class UserViewModel extends ViewModel {
                         editor.putString("Debt" ,a.getDebt());
                         editor.putString("Type" ,a.getType());
                         editor.apply();
+
                     }else {
                         errorDialog(c,response.getString("response_message"));
                     }

@@ -37,6 +37,7 @@ import java.util.Map;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.InvoiceLogModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.InvoiceModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.PaymentModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.R;
 import mazzoubi.ldjobs.com.newworkflow.ViewModel.Invoices.InvoiceLogViewModel;
 import mazzoubi.ldjobs.com.newworkflow.ViewModel.Invoices.InvoiceViewModel;
@@ -140,9 +141,8 @@ public class InvoiceInfoActivity extends AppCompatActivity {
                         if(invPay>0){
                             Toast.makeText(InvoiceInfoActivity.this, "لايجوز تعديل فاتورة عليها عمليات دفع!", Toast.LENGTH_SHORT).show();
                         }else {
-                            invoicesViewModel.updateInv(InvoiceInfoActivity.this,invoice.getInvoiceId(),
-                                    afterChangeInvAm+"",
-                                    getSharedPreferences("emp",MODE_PRIVATE).getString("id",""));
+                            invoicesViewModel.updateInv(InvoiceInfoActivity.this,invoice,
+                                    afterChangeInvAm+"", UserInfo.getUser(InvoiceInfoActivity.this).getId());
                         }
 
 

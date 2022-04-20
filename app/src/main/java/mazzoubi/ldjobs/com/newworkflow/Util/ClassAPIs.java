@@ -17,11 +17,25 @@ public class ClassAPIs {
 
     // Invoices
     public static final String InsertInvoices = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/InsertInvoices";
+    public static final String UpdateInvoices = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/UpdateInvoices";
     public static final String GetInvoices = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/GetInvoices";
     public static final String GetPayments = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/GetPayments";
     public static final String InsertPayments = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/InsertPayments";
+    public static final String GetInvoicesLog = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/GetInvoicesLog";
+    public static final String GetChargeInvoice = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/GetChargeInvoice";
 
 
     ////////////////////////
     public static final String GetInvType = "";
+
+/////////////////////////////
+    // userExchangeCommissions
+
+    public static final String InsertCommissionTransfer = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/InsertCommissionTransfer";
+    public static final String UpdateCommissionTransfer = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/UpdateCommissionTransfer";
+
+    ////////////////////////
+    // banks
+    public static final String InsertBanks = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/InsertBanks";
+    public static final String GetBanks = "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/GetBanks";
 }
