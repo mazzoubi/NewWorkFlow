@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -86,22 +87,65 @@ public class UserExchangeViewModel extends ViewModel {
         }
     }
 
-    public void getExchanged(Activity c, String dateFrom , String dateTo , String userId , String exType){
+    public void getExchanged(Activity c, String dateFrom , String dateTo , String userId ,String exType){
         // exType if 1:-> from   else 2:-> to
 
+        ArrayList<UserExchangeModel> temp = new ArrayList<>();
         listOfExchanges = new MutableLiveData<>();
         JSONObject jsonObject = new JSONObject();
+        String query = "and Convert(date, comt.created_date, 23) between" +
+                " Convert(date, '"+dateFrom+"', 23) and " +
+                "Convert(date, '"+dateTo+"', 23)" ;
         try {
             jsonObject.put("dateFrom",dateFrom);
             jsonObject.put("dateFrom",dateTo);
 
             if (!userId.isEmpty()){
                 if (exType.equals("1")){
-                    jsonObject.put("fromUserId",userId);
+                    //from
+                    query+=" and comt.from_user_id="+userId;
                 }else {
-                    jsonObject.put("toUserId",userId);
+                    //to
+                    query+=" and comt.to_user_id="+userId;
                 }
             }
+
+            jsonObject.put("Datatype","5");
+            jsonObject.put("Key",query );
+            Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
+                    ClassAPIs.GetCommissionTransfer, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("data");
+                        for (int i=0 ; i<jsonArray.length();i++){
+                            UserExchangeModel a = new UserExchangeModel();
+                            try {a.setId(jsonArray.getJSONObject(i).getString("id"));}catch (Exception e){}
+                            try {a.setFromUserId(jsonArray.getJSONObject(i).getString("from_user_id"));}catch (Exception e){}
+                            try {a.setFromUserName(jsonArray.getJSONObject(i).getString("from_user_name"));}catch (Exception e){}
+                            try {a.setToUserId(jsonArray.getJSONObject(i).getString("to_user_id"));}catch (Exception e){}
+                            try {a.setToUserName(jsonArray.getJSONObject(i).getString("to_user_name"));}catch (Exception e){}
+                            try {a.setDate(jsonArray.getJSONObject(i).getString("created_date"));}catch (Exception e){}
+                            try {a.setTime(jsonArray.getJSONObject(i).getString("created_time"));}catch (Exception e){}
+                            try {a.setAcceptDate(jsonArray.getJSONObject(i).getString("accepted_date"));}catch (Exception e){}
+                            try {a.setAcceptTime(jsonArray.getJSONObject(i).getString("accepted_time"));}catch (Exception e){}
+                            try {a.setAmount(jsonArray.getJSONObject(i).getString("amount"));}catch (Exception e){}
+                            try {a.setState(jsonArray.getJSONObject(i).getString("state"));}catch (Exception e){}
+                            try {a.setNotes(jsonArray.getJSONObject(i).getString("note"));}catch (Exception e){}
+                            temp.add(0,a);
+                        }
+                        listOfExchanges.setValue(temp);
+                    }catch (Exception e){
+                        errorDialog(c,e.toString());
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    errorDialog(c,error.toString());
+                }
+            }));
+
 
         }catch (Exception e){}
 
@@ -111,7 +155,7 @@ public class UserExchangeViewModel extends ViewModel {
         JSONObject jsonObject = new JSONObject();
         try {
 
-            jsonObject.put("DataType","" );
+            jsonObject.put("DataType","1" );
             jsonObject.put("Id",exchangeModel.getId() );
             jsonObject.put("FromUserId",exchangeModel.getFromUserId() );
             jsonObject.put("ToUserId",exchangeModel.getToUserId() );
@@ -146,7 +190,7 @@ public class UserExchangeViewModel extends ViewModel {
         JSONObject jsonObject = new JSONObject();
         try {
 
-            jsonObject.put("DataType","" );
+            jsonObject.put("DataType","2" );
             jsonObject.put("Id",exchangeModel.getId() );
             jsonObject.put("FromUserId",exchangeModel.getFromUserId() );
             jsonObject.put("ToUserId",exchangeModel.getToUserId() );

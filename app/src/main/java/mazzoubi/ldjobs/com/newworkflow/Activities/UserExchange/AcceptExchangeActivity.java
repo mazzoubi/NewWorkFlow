@@ -25,12 +25,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import mazzoubi.ldjobs.com.newworkflow.Activities.Clients.AddNewClientActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.Adapters.AdapterOpenInvoice;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.ManageInvoiceActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.OpenInvoiceActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.UserExchange.Adapters.UserExchAdapter;
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.OpenInvoiceModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.UsersExchange.UserExchangeModel;
 import mazzoubi.ldjobs.com.newworkflow.R;
@@ -43,7 +45,6 @@ import mazzoubi.ldjobs.com.newworkflow.ViewModel.Users.UserViewModel;
 public class AcceptExchangeActivity extends AppCompatActivity {
 
     TextView txvDateFrom , txvDateTo ;
-    AutoCompleteTextView edtClientName ;
     Spinner spinnerUser ;
     ListView listView;
     Activity activity ;
@@ -68,7 +69,6 @@ public class AcceptExchangeActivity extends AppCompatActivity {
         toggleButton = findViewById(R.id.toggleButton);
 
         spinnerUser = findViewById(R.id.spinnerUser);
-        edtClientName = findViewById(R.id.edtClientName);
 
         listView = findViewById(R.id.listView);
 
@@ -99,13 +99,13 @@ public class AcceptExchangeActivity extends AppCompatActivity {
                     users.add(d);
                     strUsers.add(d.getName());
                 }
-                if (getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("0")
-                        ||getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("1")){
+                if (getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("1")
+                        ||getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("2")){
 
                 }else {
                     for (UserModel d:userModels){
                         if (d.getId()
-                                .equals(getSharedPreferences("Users",MODE_PRIVATE).getString("Id",""))){
+                                .equals(UserInfo.getUser(AcceptExchangeActivity.this).getId())){
                             users = new ArrayList<>();
                             strUsers = new ArrayList<>();
                             users.add(d);
@@ -113,7 +113,7 @@ public class AcceptExchangeActivity extends AppCompatActivity {
                         }
                     }
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(AcceptExchangeActivity.this, android.R.layout.simple_list_item_1,strUsers);
+                ArrayAdapter<String>adapter = new ArrayAdapter<>(AcceptExchangeActivity.this, android.R.layout.simple_list_item_1,strUsers);
                 spinnerUser.setAdapter(adapter);
             }
         });
@@ -149,7 +149,12 @@ public class AcceptExchangeActivity extends AppCompatActivity {
             exType="1";
         }
         if (spinnerUser.getSelectedItemPosition()==0){
+            if (UserInfo.getUser(AcceptExchangeActivity.this).getType().equals("1")
+            ||UserInfo.getUser(AcceptExchangeActivity.this).getType().equals("2")){
 
+            }else {
+                userId = users.get(spinnerUser.getSelectedItemPosition()).getId();
+            }
         }else {
             userId = users.get(spinnerUser.getSelectedItemPosition()).getId();
         }

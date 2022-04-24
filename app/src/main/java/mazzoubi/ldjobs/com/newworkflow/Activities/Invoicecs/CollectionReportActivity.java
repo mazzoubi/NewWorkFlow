@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import mazzoubi.ldjobs.com.newworkflow.Data.Banks.BanksModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.PaymentModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserModel;
 import mazzoubi.ldjobs.com.newworkflow.R;
 import mazzoubi.ldjobs.com.newworkflow.Util.ClassDate;
@@ -120,13 +121,13 @@ public class CollectionReportActivity extends AppCompatActivity {
                     users.add(d);
                     strUsers.add(d.getName());
                 }
-                if (getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("0")
-                ||getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("1")){
+                if (UserInfo.getUser(CollectionReportActivity.this).getType().equals("1")
+                ||UserInfo.getUser(CollectionReportActivity.this).getType().equals("2")){
 
                 }else {
                     for (UserModel d:userModels){
                         if (d.getId()
-                                .equals(getSharedPreferences("Users",MODE_PRIVATE).getString("Id",""))){
+                                .equals(UserInfo.getUser(activity).getId())){
                             users = new ArrayList<>();
                             strUsers = new ArrayList<>();
                             users.add(d);

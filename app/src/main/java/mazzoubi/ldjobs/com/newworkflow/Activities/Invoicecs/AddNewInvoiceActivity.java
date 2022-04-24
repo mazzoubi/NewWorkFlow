@@ -169,6 +169,7 @@ public class AddNewInvoiceActivity extends AppCompatActivity {
                                 inv.setCreatedByUserId(getSharedPreferences("User",MODE_PRIVATE).getString("Id",""));
                                 inv.setClientId(clientId);
                                 c.addInvoice(activity,inv,sharedBody);
+                                AddInvoice.super.dismiss();
                             }
 
 

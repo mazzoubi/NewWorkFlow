@@ -10,10 +10,24 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.NewWorkFlow"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Activities.Users.ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Users.ShowUsersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Admin.AdminDashboardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Permissions.UserPermissionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Main.Dashboard3Activity"
+            android:exported="true" />
         <activity
             android:name=".Activities.Clients.ManageClientsActivity"
             android:exported="true" />

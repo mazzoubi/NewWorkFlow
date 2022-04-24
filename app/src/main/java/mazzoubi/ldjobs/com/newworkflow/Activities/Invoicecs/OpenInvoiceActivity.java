@@ -172,13 +172,13 @@ public class OpenInvoiceActivity extends AppCompatActivity {
                     users.add(d);
                     strUsers.add(d.getName());
                 }
-                if (getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("0")
-                        ||getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("1")){
+                if (getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("1")
+                        ||getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("2")){
 
                 }else {
                     for (UserModel d:userModels){
                         if (d.getId()
-                                .equals(getSharedPreferences("Users",MODE_PRIVATE).getString("Id",""))){
+                                .equals(UserInfo.getUser(activity).getId())){
                             users = new ArrayList<>();
                             strUsers = new ArrayList<>();
                             users.add(d);

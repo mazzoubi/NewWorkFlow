@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import mazzoubi.ldjobs.com.newworkflow.Activities.Main.Dashboard3Activity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Main.DashboardActivity;
 import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserModel;
 import mazzoubi.ldjobs.com.newworkflow.R;
@@ -28,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
                     getSharedPreferences("User",MODE_PRIVATE).getString("Name","")==null){
                 init();
             }else {
-                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                startActivity(new Intent(getApplicationContext(), Dashboard3Activity.class));
                 this.finish();
             }
         }catch (Exception e){

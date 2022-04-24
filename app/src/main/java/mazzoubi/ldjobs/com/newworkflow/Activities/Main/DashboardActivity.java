@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Main.Adapters.DashboardAdapter;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Main.Model.ActivityModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.R;
 import mazzoubi.ldjobs.com.newworkflow.ViewModel.Clients.ClientsViewModel;
 
@@ -47,35 +48,32 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         ThisActivity = DashboardActivity.this;
         init();
-        startActivity(new Intent(getApplicationContext(),Dashboard2Activity.class));
-        finish();
+//        startActivity(new Intent(getApplicationContext(),Dashboard2Activity.class));
+//        finish();
     }
 
     void init(){
         gridView = findViewById(R.id.gridView);
         txvUserInfo = findViewById(R.id.txvUserInfo);
-        activities = new ArrayList<>();
-        activities = ActivityModel.listActivity(DashboardActivity.this);
-        ArrayAdapter<ActivityModel> adapter = new DashboardAdapter(getApplicationContext(),
-                R.layout.row_dashboard,activities);
-        gridView.setAdapter(adapter);
-        setListViewHeightBasedOnChildren(gridView);
-
+        setDashboard();
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if ( activities.get(position).name.equals("دفع فاتورة عميل") ){
-                    ChooseClientDialog a = new ChooseClientDialog(activities.get(position).name,
-                            activities.get(position).intent);
-                    a.show();
-                }else if (activities.get(position).name.equals("إنشاء فاتورة عميل")){
-                    ChooseClientDialog a = new ChooseClientDialog(activities.get(position).name,
-                            activities.get(position).intent);
-                    a.show();
+                if (position==activities.size()-1){
+                    UserInfo.logout(DashboardActivity.this);
                 }else {
-                    startActivity(activities.get(position).intent);
+                    if ( activities.get(position).name.equals("دفع فاتورة عميل") ){
+                        ChooseClientDialog a = new ChooseClientDialog(activities.get(position).name,
+                                activities.get(position).intent);
+                        a.show();
+                    }else if (activities.get(position).name.equals("إنشاء فاتورة عميل")){
+                        ChooseClientDialog a = new ChooseClientDialog(activities.get(position).name,
+                                activities.get(position).intent);
+                        a.show();
+                    }else {
+                        startActivity(activities.get(position).intent);
+                    }
                 }
-
             }
         });
 
@@ -83,10 +81,19 @@ public class DashboardActivity extends AppCompatActivity {
         getAllClient();
     }
 
+    void setDashboard(){
+        activities = new ArrayList<>();
+        activities = ActivityModel.listActivity(DashboardActivity.this);
+        ArrayAdapter<ActivityModel> adapter = new DashboardAdapter(getApplicationContext(),
+                R.layout.row_dashboard,activities);
+        gridView.setAdapter(adapter);
+        setListViewHeightBasedOnChildren(gridView);
+    }
+
     void getUserInfo(){
         txvUserInfo.setText(
-             "الاسم: "+   getSharedPreferences("User",MODE_PRIVATE).getString("Name","")+"\n"+
-             "الذمم: "+   getSharedPreferences("User",MODE_PRIVATE).getString("Debt","")
+             "الاسم: "+ UserInfo.getUser(DashboardActivity.this).getName() +"\n"+
+             "الذمم: "+   UserInfo.getUser(DashboardActivity.this).getDebt()
         );
     }
 

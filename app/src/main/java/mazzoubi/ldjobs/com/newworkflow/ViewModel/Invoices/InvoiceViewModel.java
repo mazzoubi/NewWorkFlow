@@ -224,118 +224,104 @@ public class InvoiceViewModel extends ViewModel {
                         try {
                             aa.setCreatedDate(jsonArray.getJSONObject(i).getString("created_date"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setCreatedTime(jsonArray.getJSONObject(i).getString("created_time"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setCreatedByUserId(jsonArray.getJSONObject(i).getString("created_by_user_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
+                        }
+                        try {
+                            aa.setCreatedByUserName(jsonArray.getJSONObject(i).getString("created_by_user_name"));
+                        }catch (Exception e){
+                             
                         }
                         try {
                             aa.setInvType(jsonArray.getJSONObject(i).getString("inv_type"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceAmount(jsonArray.getJSONObject(i).getString("invoice_amount"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceId(jsonArray.getJSONObject(i).getString("invoice_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceNumber(jsonArray.getJSONObject(i).getString("invoice_no"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientId(jsonArray.getJSONObject(i).getString("point_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setCRM_ID(jsonArray.getJSONObject(i).getString("crm_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceState(jsonArray.getJSONObject(i).getString("invoice_state"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoicePaid(jsonArray.getJSONObject(i).getString("invoice_payed"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceUnpaid(jsonArray.getJSONObject(i).getString("invoice_unpaid"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientId(jsonArray.getJSONObject(i).getString("client_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientName(jsonArray.getJSONObject(i).getString("client_name"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientPhone(jsonArray.getJSONObject(i).getString("client_phone"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientHolderName(jsonArray.getJSONObject(i).getString("holder_name"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
 
 
                         try {
                             aa.setModifiedDate(jsonArray.getJSONObject(i).getString("modifiedDate"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setModifiedTime(jsonArray.getJSONObject(i).getString("modifiedTime"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setModifiedByUserName(jsonArray.getJSONObject(i).getString("modifiedByUserName"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
 
                         temp.add(0,aa);
@@ -378,118 +364,104 @@ public class InvoiceViewModel extends ViewModel {
                         try {
                             aa.setCreatedDate(jsonArray.getJSONObject(i).getString("created_date"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setCreatedTime(jsonArray.getJSONObject(i).getString("created_time"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setCreatedByUserId(jsonArray.getJSONObject(i).getString("created_by_user_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
+                        }
+                        try {
+                            aa.setCreatedByUserName(jsonArray.getJSONObject(i).getString("created_by_user_name"));
+                        }catch (Exception e){
+
                         }
                         try {
                             aa.setInvType(jsonArray.getJSONObject(i).getString("inv_type"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceAmount(jsonArray.getJSONObject(i).getString("invoice_amount"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceId(jsonArray.getJSONObject(i).getString("invoice_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceNumber(jsonArray.getJSONObject(i).getString("invoice_no"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientId(jsonArray.getJSONObject(i).getString("point_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setCRM_ID(jsonArray.getJSONObject(i).getString("crm_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceState(jsonArray.getJSONObject(i).getString("invoice_state"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoicePaid(jsonArray.getJSONObject(i).getString("invoice_payed"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceUnpaid(jsonArray.getJSONObject(i).getString("invoice_unpaid"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientId(jsonArray.getJSONObject(i).getString("client_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientName(jsonArray.getJSONObject(i).getString("client_name"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientPhone(jsonArray.getJSONObject(i).getString("client_phone"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientHolderName(jsonArray.getJSONObject(i).getString("holder_name"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
 
 
                         try {
                             aa.setModifiedDate(jsonArray.getJSONObject(i).getString("modifiedDate"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setModifiedTime(jsonArray.getJSONObject(i).getString("modifiedTime"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setModifiedByUserName(jsonArray.getJSONObject(i).getString("modifiedByUserName"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
 
                         if (!aa.getInvoiceState().equals("3")){
@@ -535,118 +507,99 @@ public class InvoiceViewModel extends ViewModel {
                         try {
                             aa.setCreatedDate(jsonArray.getJSONObject(i).getString("created_date"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setCreatedTime(jsonArray.getJSONObject(i).getString("created_time"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setCreatedByUserId(jsonArray.getJSONObject(i).getString("created_by_user_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvType(jsonArray.getJSONObject(i).getString("inv_type"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceAmount(jsonArray.getJSONObject(i).getString("invoice_amount"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceId(jsonArray.getJSONObject(i).getString("invoice_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceNumber(jsonArray.getJSONObject(i).getString("invoice_no"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientId(jsonArray.getJSONObject(i).getString("point_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setCRM_ID(jsonArray.getJSONObject(i).getString("crm_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceState(jsonArray.getJSONObject(i).getString("invoice_state"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoicePaid(jsonArray.getJSONObject(i).getString("invoice_payed"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setInvoiceUnpaid(jsonArray.getJSONObject(i).getString("invoice_unpaid"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientId(jsonArray.getJSONObject(i).getString("client_id"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientName(jsonArray.getJSONObject(i).getString("client_name"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientPhone(jsonArray.getJSONObject(i).getString("client_phone"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setClientHolderName(jsonArray.getJSONObject(i).getString("holder_name"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
 
 
                         try {
                             aa.setModifiedDate(jsonArray.getJSONObject(i).getString("modifiedDate"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setModifiedTime(jsonArray.getJSONObject(i).getString("modifiedTime"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
                         try {
                             aa.setModifiedByUserName(jsonArray.getJSONObject(i).getString("modifiedByUserName"));
                         }catch (Exception e){
-                            String s = e.toString();
-                            errorDialog(c,e.toString());
+                             
                         }
 
                         temp.add(0,aa);
@@ -671,6 +624,36 @@ public class InvoiceViewModel extends ViewModel {
 
     public void deleteInvoice(Activity c , String invoiceId,String userId ){
 
+//        JSONObject jsonObject = new JSONObject();
+//        try {
+//            jsonObject.put("Datatype" , "3" );
+//            jsonObject.put("PaymentId" , "" );
+//            jsonObject.put("InvoiceId" , invoiceId );
+//            jsonObject.put("UserId" , userId );
+//            jsonObject.put("CreatedDate" , "" );
+//            jsonObject.put("CreatedTime" , "" );
+//            jsonObject.put("Type" , "" );
+//            jsonObject.put("Amount" , "" );
+//            jsonObject.put("PaymentType" , "" );
+//            jsonObject.put("IsDeleted" , "" );
+//            jsonObject.put("Note" , "" );
+//
+//            Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
+//                    ClassAPIs.UpdatePayments, jsonObject, new Response.Listener<JSONObject>() {
+//                @Override
+//                public void onResponse(JSONObject response) {
+//
+//
+//                }
+//            }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//                    errorDialog(c,error.toString());
+//                }
+//            }));
+//        }catch (Exception e){
+//            errorDialog(c,e.toString());
+//        }
     }
 
     public void updateInv(Activity c , InvoiceModel invoiceModel , String invAmount,String userId){

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import mazzoubi.ldjobs.com.newworkflow.Activities.Main.Dashboard3Activity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Main.DashboardActivity;
 import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserModel;
 import mazzoubi.ldjobs.com.newworkflow.Util.ClassAPIs;
@@ -236,6 +237,11 @@ public class UserViewModel extends ViewModel {
                             // errorDialog(c,""+"\n"+e.toString());
                         }
 
+                        try { a.setType(data.getJSONObject(0).getString("type"));
+                        }catch (Exception e){
+                            // errorDialog(c,""+"\n"+e.toString());
+                        }
+
                         userObject.setValue(a);
                     }else {
                         errorDialog(c,response.getString("response_message"));
@@ -322,7 +328,7 @@ public class UserViewModel extends ViewModel {
 
                         updateUser(c,a);
                         login.setValue(a);
-                        c.startActivity(new Intent(c, DashboardActivity.class));
+                        c.startActivity(new Intent(c, Dashboard3Activity.class));
                         SharedPreferences.Editor editor= c.getSharedPreferences("User", Context.MODE_PRIVATE).edit();
                         editor.putString("AID" ,a.getAID());
                         editor.putString("Name" ,a.getName());

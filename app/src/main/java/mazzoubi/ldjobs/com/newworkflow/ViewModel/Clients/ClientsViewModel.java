@@ -47,56 +47,41 @@ public class ClientsViewModel extends ViewModel {
             if (!phone.equals("0")){
                 setProgressDialog(c);
 
-                String key = ClassDate.currentTimeAtMs();
-                Map<String,Object> map = new HashMap<>();
-                map.put("clientName", clientModel.getClientName());
-                map.put("clientPhone", phone);
-                map.put("clientEmail", clientModel.getClientEmail());
-                map.put("holderId", clientModel.getHolderId());
-                map.put("clientId", key);
-                map.put("crm_id", "");
+                setProgressDialog(c);
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("ClientEmail" , clientModel.getClientEmail() );
+                    jsonObject.put("ClientName" , clientModel.getClientName() );
+                    jsonObject.put("ClientPhone" , clientModel.getClientPhone() );
+                    jsonObject.put("HolderId" , clientModel.getHolderId() );
+                    jsonObject.put("CrmId" , "0" );
+                    jsonObject.put("Type" , "0" );
 
-                FirebaseFirestore.getInstance().collection(collectionClients).document(key).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                }catch (Exception e){}
+
+                Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
+                        ClassAPIs.InsertClients, jsonObject, new Response.Listener<JSONObject>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onResponse(JSONObject response) {
                         dismissProgressDialog();
-                        successDialog(c,"تم انشاء العميل بنجاح");
+                        try {
+                            String response_state = response.getString("response_state");
+                            if (response_state.equals("1")){
+                                successDialog(c,response.getString("response_message"));
+                            }else {
+                                errorDialog(c,response.getString("response_message"));
+                            }
+                        }catch (Exception e){
+                            errorDialog(c,"خطأ في عملية الإضافة, الرجاء المحاولة مرة اخرى!");
+                        }
                     }
-                });
-//                setProgressDialog(c);
-//                JSONObject jsonObject = new JSONObject();
-//                try {
-//                    jsonObject.put("ClientEmail" , clientModel.getClientEmail() );
-//                    jsonObject.put("ClientName" , clientModel.getClientName() );
-//                    jsonObject.put("ClientPhone" , clientModel.getClientPhone() );
-//                    jsonObject.put("HolderId" , clientModel.getHolderId() );
-//                    jsonObject.put("CrmId" , "" );
-//
-//                }catch (Exception e){}
-//
-//                Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
-//                        ClassAPIs.InsertClients, jsonObject, new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        dismissProgressDialog();
-//                        try {
-//                            String response_state = response.getString("response_state");
-//                            if (response_state.equals("1")){
-//                                successDialog(c,response.getString("response_message"));
-//                            }else {
-//                                errorDialog(c,response.getString("response_message"));
-//                            }
-//                        }catch (Exception e){
-//                            errorDialog(c,"خطأ في عملية الإضافة, الرجاء المحاولة مرة اخرى!");
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        dismissProgressDialog();
-//                        errorDialog(c,"خطأ في عملية الوصول الى الخادم, الرجاء المحاولة مرة اخرى!");
-//                    }
-//                }));
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        dismissProgressDialog();
+                        errorDialog(c,"خطأ في عملية الوصول الى الخادم, الرجاء المحاولة مرة اخرى!");
+                    }
+                }));
             }
 
         }
@@ -277,7 +262,6 @@ public class ClientsViewModel extends ViewModel {
 
         }
     }
-
     void setProgressDialog(Activity c){
         progressDialog=new CustomProgressDialog(c);
         try {
@@ -292,8 +276,6 @@ public class ClientsViewModel extends ViewModel {
         }catch (Exception e){}
 
     }
-
-
 
     String phoneCorrection(Activity c,String ph){
         long a= Long.parseLong(ph);

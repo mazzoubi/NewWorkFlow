@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/tool"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:layout_height="40dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:id="@+id/top"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="24dp"
+                android:fontFamily="serif"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentTop="true"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:text="معلومات الموظف"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tool"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_margin="25dp"
+            app:cardElevation="15dp"
+            app:cardCornerRadius="25dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/title"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="إسم المندوب"
+                    android:layout_height="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="24dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/btn_back"
+                    android:id="@+id/name"
+                    android:layout_marginLeft="15dp"
+                    android:layout_below="@+id/title"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="إسم المندوب"
+                    android:layout_height="35dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/title2"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/name"
+                    android:layout_marginTop="5dp"
+                    android:text="إسم المستخدم"
+                    android:layout_height="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="24dp"
+                    android:background="@drawable/btn_back"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/username"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/title2"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="إسم المستخدم"
+                    android:layout_height="35dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/title3"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/username"
+                    android:layout_marginTop="5dp"
+                    android:text="رقم المستخدم"
+                    android:layout_height="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="24dp"
+                    android:background="@drawable/btn_back"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/identity"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/title3"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="رقم المستخدم"
+                    android:layout_height="35dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/title4"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/identity"
+                    android:layout_marginTop="5dp"
+                    android:text="رقم الهاتف"
+                    android:layout_height="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="24dp"
+                    android:background="@drawable/btn_back"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/mobile"
+                    android:layout_below="@+id/title4"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="رقم الهاتف"
+                    android:layout_height="35dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/title5"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/mobile"
+                    android:layout_marginTop="5dp"
+                    android:text="نوع الحساب"
+                    android:layout_height="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="24dp"
+                    android:background="@drawable/btn_back"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/type"
+                    android:layout_below="@+id/title5"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="نوع الحساب"
+                    android:layout_height="35dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/title51"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/type"
+                    android:layout_marginTop="10dp"
+                    android:text="الذمم المرصدة"
+                    android:layout_height="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="24dp"
+                    android:background="@drawable/btn_back"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:id="@+id/type1"
+                    android:layout_below="@+id/title51"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="الذمم المرصدة"
+                    android:layout_height="35dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="22dp"
+                    android:background="@drawable/btn_back2"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:id="@+id/btnclose"
+                    android:layout_below="@+id/type1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="عرض و تعديل الصلاحيات"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </ScrollView>
+
+</RelativeLayout>

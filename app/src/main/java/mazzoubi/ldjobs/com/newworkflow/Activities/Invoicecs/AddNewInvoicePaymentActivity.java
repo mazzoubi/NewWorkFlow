@@ -158,7 +158,7 @@ public class AddNewInvoicePaymentActivity extends AppCompatActivity {
 
     void addPayment(String clientID,String amount,String paymentType, String type,String bankId){
         PaymentViewModel vm =ViewModelProviders.of((FragmentActivity) activity).get(PaymentViewModel.class);
-        vm.addNewInvoicesPayments(activity,amount,amount,paymentType,type,bankId);
+        vm.addNewInvoicesPayments(activity,clientID ,amount,paymentType,type,bankId,"تسديد عن العميل "+clientName);
     }
 
 

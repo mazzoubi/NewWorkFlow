@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/tool"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:layout_height="40dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:id="@+id/top"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="24dp"
+                android:fontFamily="serif"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentTop="true"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:text="صلاحيات الموظف"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tool"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_margin="25dp"
+            app:cardElevation="15dp"
+            app:cardCornerRadius="25dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="تسجيل زيارة جديدة"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch1"
+                    android:layout_height="wrap_content"/>
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="دفع فواتير التقاط"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch14"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="فتح فاتورة جديدة"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch2"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="طلبات الشحن"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch18"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="عرض الفواتير المفتوحة"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch3"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="عرض سجل الزيارات"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch4"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="فتح نقطة جديدة"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch12"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="الموزعين"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch29"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="بصمة الدخول والخروج"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch5"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="إنشاء حركة مالية"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch6"
+                    android:layout_height="wrap_content"/>
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="مقارنة التحصيل"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch15"
+                    android:layout_height="wrap_content"/>
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="عرض الحركات المالية"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch7"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="عرض سجل البصمات"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch8"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="فتح شاشة المستودعات"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch13"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="فتح شاشة المستودعات 2"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch16"
+                    android:layout_height="wrap_content"/>
+
+                <CheckBox
+                    android:id="@+id/ch21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:paddingRight="5dp"
+                    android:text="فتح شاشة المستودعات 1"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <CheckBox
+                    android:id="@+id/ch20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:paddingRight="5dp"
+                    android:text="المصروفات"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="الحولات البنكية"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch19"
+                    android:layout_height="wrap_content"/>
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="الحولات البنكية"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch22"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="تحويل أموال"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch23"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="عرض حوالات خاصة"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch9"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="خيارات المطورين"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch10"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="إدارة الفواتير"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch17"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:text="عرض الإشعارات"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingRight="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/ch11"
+                    android:layout_height="wrap_content"/>
+
+                <CheckBox
+                    android:id="@+id/ch24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:paddingRight="5dp"
+                    android:text="تحويل رصيد_بنوك خاصة"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <CheckBox
+                    android:id="@+id/ch25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:paddingRight="5dp"
+                    android:text="اضافة وتعديل المصارف_بنوك خاصة"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <CheckBox
+                    android:id="@+id/ch26"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:paddingRight="5dp"
+                    android:text="سجل العمليات_بنوك خاصة"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <CheckBox
+                    android:id="@+id/ch27"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:paddingRight="5dp"
+                    android:text="تصدير كشف_بنوك خاصة"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <CheckBox
+                    android:id="@+id/ch28"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layoutDirection="rtl"
+                    android:paddingRight="5dp"
+                    android:text="اضافة رصيد_بنوك خاصة"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="22dp"
+                    android:background="@drawable/btn_back3"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:layout_marginBottom="35dp"
+                    android:id="@+id/btnupdate"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="تعديل الصلاحيات"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </ScrollView>
+
+</RelativeLayout>

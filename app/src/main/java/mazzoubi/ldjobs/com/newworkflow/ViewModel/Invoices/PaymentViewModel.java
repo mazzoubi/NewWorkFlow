@@ -34,11 +34,12 @@ public class PaymentViewModel extends ViewModel {
     public void addNewPayment(Activity c , PaymentModel paymentModel){
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("InvoiceId" ,paymentModel.getInvoice_id() );
+            jsonObject.put("ClientID" ,paymentModel.getInvoice_id() );
             jsonObject.put("UserId" ,paymentModel.getUser_id() );
             jsonObject.put("Type" ,paymentModel.getType() );
             jsonObject.put("Amount" ,paymentModel.getAmount() );
             jsonObject.put("PaymentType" ,paymentModel.getPayment_type() );
+            jsonObject.put("BankId" ,paymentModel.getPayment_type() );
             jsonObject.put("Note" ,paymentModel.getNote() );
         }catch (Exception e){}
 
@@ -65,7 +66,7 @@ public class PaymentViewModel extends ViewModel {
     }
 
     public void addNewInvoicesPayments(Activity c,String clientID,String amount,String paymentType,
-                                       String type ,String bankId){
+                                       String type ,String bankId,String page){
 
         try {
             JSONObject j = new JSONObject();
@@ -76,6 +77,7 @@ public class PaymentViewModel extends ViewModel {
             j.put("PaymentType" , paymentType);
             j.put("BankId" , bankId);
             j.put("Note" , "");
+            j.put("Page" , page);
 
             Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
                     ClassAPIs.InsertPayments, j, new Response.Listener<JSONObject>() {
@@ -151,20 +153,21 @@ public class PaymentViewModel extends ViewModel {
 
             if (userId.isEmpty()&&clientId.isEmpty()){
 
-            }else if (!userId.isEmpty()&&clientId.isEmpty()){
-                jsonObject.put("userId",userId);
+            }
+            if (!userId.isEmpty()&&clientId.isEmpty()){
+                query+=" and pay.user_id="+userId;
             }if (userId.isEmpty()&&!clientId.isEmpty()){
-                jsonObject.put("clientId",clientId);
+                query+=" and cli.client_id="+clientId;
             }if (!userId.isEmpty()&&!clientId.isEmpty()){
-                jsonObject.put("userId",userId);
-                jsonObject.put("clientId",userId);
+                query+=" and cli.client_id="+clientId;
+                query+=" and pay.user_id="+userId;
             }
 
             setProgressDialog(c);
             ArrayList<PaymentModel> temp = new ArrayList<>();
             JSONObject jj = new JSONObject();
             jj.put("Datatype","2");
-            jj.put("Key","");
+            jj.put("Key",query);
             Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST
                     , ClassAPIs.GetPayments, jj, new Response.Listener<JSONObject>() {
                 @Override
@@ -175,11 +178,15 @@ public class PaymentViewModel extends ViewModel {
                             for (int i=0 ; i <jsonArray.length();i++){
                                 PaymentModel a=new PaymentModel();
                                 a.setInvoice_id(jsonArray.getJSONObject(i).getString("invoice_id"));
+                                a.setInvoice_no(jsonArray.getJSONObject(i).getString("invoice_id"));
+                                a.setClientId(jsonArray.getJSONObject(i).getString("client_id"));
+                                a.setClientName(jsonArray.getJSONObject(i).getString("client_name"));
                                 a.setUser_id(jsonArray.getJSONObject(i).getString("user_id"));
+                                a.setUser_name(jsonArray.getJSONObject(i).getString("name"));
                                 a.setCreated_date(jsonArray.getJSONObject(i).getString("created_date"));
                                 a.setCreated_time(jsonArray.getJSONObject(i).getString("created_time"));
                                 a.setType(jsonArray.getJSONObject(i).getString("type"));
-                                a.setAmount(jsonArray.getJSONObject(i).getString("invoice_id"));
+                                a.setAmount(jsonArray.getJSONObject(i).getString("amount"));
                                 a.setPayment_type(jsonArray.getJSONObject(i).getString("payment_type"));
                                 a.setIs_deleted(jsonArray.getJSONObject(i).getString("is_deleted"));
                                 a.setPayment_id(jsonArray.getJSONObject(i).getString("payment_id"));
@@ -191,9 +198,12 @@ public class PaymentViewModel extends ViewModel {
                             dismissProgressDialog();
                             listOfPayments.setValue(temp);
                         }else {
-                            errorDialog(c,response.getString("response_message"));
+                            dismissProgressDialog();
+                            listOfPayments.setValue(new ArrayList<PaymentModel>());
+                            errorDialog(c,"لا يوجد حركات!");
                         }
                     }catch (Exception e){
+                        dismissProgressDialog();
                         errorDialog(c,e.toString());
                     }
                 }
@@ -323,18 +333,106 @@ public class PaymentViewModel extends ViewModel {
 
     }
 
-    public void getPaymentByInvoiceId(Activity c , String invId){
-
+    public void getPaymentByInvoiceId(Activity c, String invoiceId){
         JSONObject jsonObject = new JSONObject();
+        listOfPayments=new MutableLiveData<>();
+
+        String query = "and pay.invoice_id ="+invoiceId ;
         try {
-            jsonObject.put("invoiceId",invId);
-        }catch (Exception e){}
+
+
+            setProgressDialog(c);
+            ArrayList<PaymentModel> temp = new ArrayList<>();
+            JSONObject jj = new JSONObject();
+            jj.put("Datatype","2");
+            jj.put("Key",query);
+            Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST
+                    , ClassAPIs.GetPayments, jj, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        if (response.getString("response_state").equals("1")){
+                            JSONArray jsonArray = response.getJSONArray("data");
+                            for (int i=0 ; i <jsonArray.length();i++){
+                                PaymentModel a=new PaymentModel();
+                                a.setInvoice_id(jsonArray.getJSONObject(i).getString("invoice_id"));
+                                a.setInvoice_no(jsonArray.getJSONObject(i).getString("invoice_id"));
+                                a.setClientId(jsonArray.getJSONObject(i).getString("client_id"));
+                                a.setClientName(jsonArray.getJSONObject(i).getString("client_name"));
+                                a.setUser_id(jsonArray.getJSONObject(i).getString("user_id"));
+                                a.setUser_name(jsonArray.getJSONObject(i).getString("name"));
+                                a.setCreated_date(jsonArray.getJSONObject(i).getString("created_date"));
+                                a.setCreated_time(jsonArray.getJSONObject(i).getString("created_time"));
+                                a.setType(jsonArray.getJSONObject(i).getString("type"));
+                                a.setAmount(jsonArray.getJSONObject(i).getString("amount"));
+                                a.setPayment_type(jsonArray.getJSONObject(i).getString("payment_type"));
+                                a.setIs_deleted(jsonArray.getJSONObject(i).getString("is_deleted"));
+                                a.setPayment_id(jsonArray.getJSONObject(i).getString("payment_id"));
+                                a.setNote(jsonArray.getJSONObject(i).getString("note"));
+
+                                temp.add(a);
+
+                            }
+                            dismissProgressDialog();
+                            listOfPayments.setValue(temp);
+                        }else {
+                            errorDialog(c,response.getString("response_message"));
+                        }
+                    }catch (Exception e){
+                        errorDialog(c,e.toString());
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    errorDialog(c, error.toString());
+                }
+            }));
+        }catch (Exception e){
+            errorDialog(c,e.toString());
+        }
 
 
     }
 
     public void deletePayment(Activity c , String paymentId,String userId){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Datatype" , "2" );
+            jsonObject.put("PaymentId" , paymentId );
+            jsonObject.put("InvoiceId" , "0" );
+            jsonObject.put("UserId" , userId );
+            jsonObject.put("CreatedDate" , "0" );
+            jsonObject.put("CreatedTime" , "0" );
+            jsonObject.put("Type" , "0" );
+            jsonObject.put("Amount" , "0" );
+            jsonObject.put("PaymentType" , "0" );
+            jsonObject.put("IsDeleted" , "0" );
+            jsonObject.put("Note" , "0" );
 
+            Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
+                    ClassAPIs.UpdatePayments, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        if (response.getString("response_state").equals("1")){
+                            successDialog(c,response.getString("response_message"));
+                        }else {
+                            errorDialog(c,response.getString("response_message"));
+                        }
+                    }catch (Exception e){
+                        errorDialog(c,e.toString());
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    errorDialog(c,error.toString());
+                }
+            }));
+        }catch (Exception e){
+            errorDialog(c,e.toString());
+        }
     }
 
     CustomProgressDialog progressDialog;

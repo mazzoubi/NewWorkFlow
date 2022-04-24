@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
 import mazzoubi.ldjobs.com.newworkflow.Data.UsersExchange.UserExchangeModel;
 import mazzoubi.ldjobs.com.newworkflow.R;
 import mazzoubi.ldjobs.com.newworkflow.ViewModel.UserExchange.UserExchangeViewModel;
@@ -80,20 +81,30 @@ public class UserExchAdapter extends ArrayAdapter<UserExchangeModel> {
 //        type.setText(paymentsarray.get(position).type);
         value.setText(paymentsarray.get(position).getAmount());
         notes.setText(paymentsarray.get(position).getNotes());
-        status.setText(paymentsarray.get(position).getState());
 
 
-        if(!paymentsarray.get(position).getState().equals("0"))
+
+        if (UserInfo.getUser(activity).getId().equals(paymentsarray.get(position).getFromUserId())){
             lay.setVisibility(View.INVISIBLE);
-        else
-            lay.setVisibility(View.VISIBLE);
+        }else {
+            if(!paymentsarray.get(position).getState().equals("0"))
+                lay.setVisibility(View.INVISIBLE);
+            else
+                lay.setVisibility(View.VISIBLE);
+        }
 
-        if(paymentsarray.get(position).getState().equals("0"))
+        if(paymentsarray.get(position).getState().equals("0")) {
             status.setBackgroundColor(Color.GRAY);
-        else if(paymentsarray.get(position).getState().equals("1"))
+            status.setText("معلقة");
+        }
+        else if(paymentsarray.get(position).getState().equals("1")) {
             status.setBackgroundColor(Color.GREEN);
-        else if(paymentsarray.get(position).getState().equals("-1"))
+            status.setText("مقبولة");
+        }
+        else if(paymentsarray.get(position).getState().equals("-1")) {
             status.setBackgroundColor(Color.RED);
+            status.setText("مرفوضة");
+        }
         final int x = position;
         reject.setOnClickListener(new View.OnClickListener() {
             @Override

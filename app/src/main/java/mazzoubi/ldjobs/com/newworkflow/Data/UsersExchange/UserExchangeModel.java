@@ -16,6 +16,18 @@ public class UserExchangeModel {
 
 
     public UserExchangeModel() {
+        this.id = "";
+        this.fromUserId = "";
+        this.fromUserName = "";
+        this.toUserId = "";
+        this.toUserName = "";
+        this.date = "";
+        this.time = "";
+        this.amount = "";
+        this.state = "";
+        this.acceptDate = "";
+        this.acceptTime = "";
+        this.notes = "";
     }
 
     public UserExchangeModel(String id, String fromUserId, String fromUserName, String toUserId, String toUserName, String date,

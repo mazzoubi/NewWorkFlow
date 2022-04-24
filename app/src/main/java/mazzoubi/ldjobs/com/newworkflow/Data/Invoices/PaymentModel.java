@@ -22,7 +22,24 @@ public class PaymentModel {
 
 
 
-    public PaymentModel() { }
+    public PaymentModel() {
+        this.invoice_id = "";
+        this.invoice_no = "";
+        this.invoiceAmount = "";
+        this.user_id = "";
+        this.user_name = "";
+        this.clientName = "";
+        this.clientId = "";
+        this.created_date = "";
+        this.created_time = "";
+        this.type = "";
+        this.amount = "";
+        this.invoiceUnpaid = "";
+        this.payment_type = "";
+        this.is_deleted = "";
+        this.payment_id = "";
+        this.note = "";
+    }
 
     public PaymentModel(String invoice_id,String invoice_no, String invoiceAmount,
                         String user_id, String user_name, String clientName,
