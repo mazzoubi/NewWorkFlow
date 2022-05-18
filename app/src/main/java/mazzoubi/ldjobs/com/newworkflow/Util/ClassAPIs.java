@@ -4,6 +4,7 @@ public class ClassAPIs {
 
     private static final String baseUrl="*************************************";
 
+
     //CRM_API
     public static final String OpenDistPoint = baseUrl+"/OpenDistPos";
 
