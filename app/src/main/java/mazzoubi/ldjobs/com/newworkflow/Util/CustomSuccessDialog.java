@@ -40,6 +40,7 @@ public class CustomSuccessDialog extends Dialog {
                 dismiss();
             }
         });
+
     }
 
     @Override

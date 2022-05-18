@@ -156,9 +156,12 @@ public class UserViewModel extends ViewModel {
                         }catch (Exception e){
                             // errorDialog(c,""+"\n"+e.toString());
                         }
+                        try { a.setType(jsonArray.getJSONObject(i).getString("type"));
+                        }catch (Exception e){
+                            // errorDialog(c,""+"\n"+e.toString());
+                        }
                         temp.add(a);
                     }
-                    dismissProgressDialog();
                     listUsers.setValue(temp);
 
                 }catch (Exception e){
@@ -321,10 +324,11 @@ public class UserViewModel extends ViewModel {
                             // errorDialog(c,""+"\n"+e.toString());
                         }
 
-                        try { a.setAID(data.getJSONObject(0).getString("type"));
+                        try { a.setType(data.getJSONObject(0).getString("type"));
                         }catch (Exception e){
                             // errorDialog(c,""+"\n"+e.toString());
                         }
+
 
                         updateUser(c,a);
                         login.setValue(a);

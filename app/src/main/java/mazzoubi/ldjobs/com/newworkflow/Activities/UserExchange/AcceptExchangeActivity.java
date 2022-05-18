@@ -27,6 +27,7 @@ import java.util.Locale;
 
 import mazzoubi.ldjobs.com.newworkflow.Activities.Clients.AddNewClientActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.Adapters.AdapterOpenInvoice;
+import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.CollectionReportActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.ManageInvoiceActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.OpenInvoiceActivity;
 import mazzoubi.ldjobs.com.newworkflow.Activities.UserExchange.Adapters.UserExchAdapter;
@@ -99,8 +100,8 @@ public class AcceptExchangeActivity extends AppCompatActivity {
                     users.add(d);
                     strUsers.add(d.getName());
                 }
-                if (getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("1")
-                        ||getSharedPreferences("Users",MODE_PRIVATE).getString("Type","").equals("2")){
+                if (UserInfo.getUser(AcceptExchangeActivity.this).getType().equals("1")
+                        ||UserInfo.getUser(AcceptExchangeActivity.this).getType().equals("2")){
 
                 }else {
                     for (UserModel d:userModels){

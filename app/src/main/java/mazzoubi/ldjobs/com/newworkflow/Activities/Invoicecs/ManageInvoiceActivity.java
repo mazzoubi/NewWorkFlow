@@ -42,6 +42,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import mazzoubi.ldjobs.com.newworkflow.Activities.Invoicecs.Adapters.adapterInvoices2;
+import mazzoubi.ldjobs.com.newworkflow.Activities.UserExchange.AcceptExchangeActivity;
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Invoices.InvoiceModel;
 import mazzoubi.ldjobs.com.newworkflow.Data.Users.UserInfo;
@@ -299,8 +300,17 @@ public class ManageInvoiceActivity extends AppCompatActivity {
                      employees.add(d);
                      strEmployees.add(d.getName());
                  }
+                 if (UserInfo.getUser(ManageInvoiceActivity.this).getType().equals("1")
+                         ||UserInfo.getUser(ManageInvoiceActivity.this).getType().equals("2")){
+
+                 }else {
+                    aCEmpName.setText(UserInfo.getUser(ManageInvoiceActivity.this).getName());
+                    aCEmpName.setEnabled(false);
+                 }
+
                  ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,strEmployees);
                  aCEmpName.setAdapter(adapter);
+
              }
          });
      }

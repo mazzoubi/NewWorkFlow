@@ -1,6 +1,7 @@
 package mazzoubi.ldjobs.com.newworkflow.ViewModel.Clients;
 
 import android.app.Activity;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -18,9 +19,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.security.KeyFactory;
+import java.security.PrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import mazzoubi.ldjobs.com.newworkflow.Data.Clients.ClientModel;
 import mazzoubi.ldjobs.com.newworkflow.Util.ClassAPIs;
@@ -28,6 +36,7 @@ import mazzoubi.ldjobs.com.newworkflow.Util.ClassDate;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomErrorDialog;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomProgressDialog;
 import mazzoubi.ldjobs.com.newworkflow.Util.CustomSuccessDialog;
+import mazzoubi.ldjobs.com.newworkflow.Util.RSA;
 
 public class ClientsViewModel extends ViewModel {
     private static final String collectionClients = "Clients";
@@ -47,41 +56,110 @@ public class ClientsViewModel extends ViewModel {
             if (!phone.equals("0")){
                 setProgressDialog(c);
 
-                setProgressDialog(c);
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("ClientEmail" , clientModel.getClientEmail() );
-                    jsonObject.put("ClientName" , clientModel.getClientName() );
-                    jsonObject.put("ClientPhone" , clientModel.getClientPhone() );
-                    jsonObject.put("HolderId" , clientModel.getHolderId() );
-                    jsonObject.put("CrmId" , "0" );
-                    jsonObject.put("Type" , "0" );
+                try{
+                    JSONObject jsonObject2 = new JSONObject();
+                    JSONObject jsonObject3 = new JSONObject();
+                    String base64Encoded = "";
 
-                }catch (Exception e){}
+                    jsonObject3.put("TimeMs" , ClassDate.currentTimeAtMs()+new Random().nextInt(1000) + 1);
+                    jsonObject3.put("fname" , clientModel.getClientName());
+                    jsonObject3.put("lname" , "");
+                    jsonObject3.put("userEmail" , clientModel.getClientEmail());
+                    jsonObject3.put("userPassword" , clientModel.getPassword());
+                    jsonObject3.put("mobile" , clientModel.getClientPhone());
+                    jsonObject3.put("address" , clientModel.getLocation());
+                    jsonObject3.put("posCode" , clientModel.getPasscode());
+                    jsonObject3.put("joinDate" , ClassDate.date());
 
-                Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
-                        ClassAPIs.InsertClients, jsonObject, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        dismissProgressDialog();
-                        try {
-                            String response_state = response.getString("response_state");
-                            if (response_state.equals("1")){
-                                successDialog(c,response.getString("response_message"));
-                            }else {
-                                errorDialog(c,response.getString("response_message"));
+                    try {
+                        KeyFactory kf = KeyFactory.getInstance("RSA");
+                        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(RSA.priv));
+                        PrivateKey privKey = kf.generatePrivate(keySpecPKCS8);
+                        X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(RSA.publ));
+                        RSAPublicKey pubKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
+
+                        RSA.setKey(pubKey, privKey);
+
+                        byte[] encodeData = RSA.encrypt(RSA.getPublicKey2(RSA.GetMap()), jsonObject3.toString());
+                        base64Encoded = Base64.getEncoder().encodeToString(encodeData); }
+
+                    catch (Exception e){}
+
+                    try {
+                        jsonObject2.put("data" , base64Encoded);
+                    }catch (Exception e){}
+                    Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
+                            "http://51.89.167.62/EzPayServices/WorkFlowServices.svc/OpenDistPos", jsonObject2, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try{
+
+                                String crm = response.getJSONObject("data").getString("posId");
+
+
+                                JSONObject jsonObject = new JSONObject();
+                                try {
+                                    jsonObject.put("ClientEmail" , clientModel.getClientEmail() );
+                                    jsonObject.put("ClientName" , clientModel.getClientName() );
+                                    jsonObject.put("ClientPhone" , clientModel.getClientPhone() );
+                                    jsonObject.put("HolderId" , clientModel.getHolderId() );
+                                    jsonObject.put("CrmId" , crm );
+                                    jsonObject.put("Type" , "0" );
+
+                                }catch (Exception e){}
+
+                                Volley.newRequestQueue(c).add(new JsonObjectRequest(Request.Method.POST,
+                                        ClassAPIs.InsertClients, jsonObject, new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        dismissProgressDialog();
+                                        try {
+                                            String response_state = response.getString("response_state");
+                                            if (response_state.equals("1")){
+                                                successDialog(c,response.getString("response_message"));
+                                            }else {
+                                                errorDialog(c,response.getString("response_message"));
+                                            }
+                                        }catch (Exception e){
+                                            errorDialog(c,"خطأ في عملية الإضافة, الرجاء المحاولة مرة اخرى!");
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        dismissProgressDialog();
+                                        errorDialog(c,"خطأ في عملية الوصول الى الخادم, الرجاء المحاولة مرة اخرى!");
+                                    }
+                                }));
                             }
-                        }catch (Exception e){
-                            errorDialog(c,"خطأ في عملية الإضافة, الرجاء المحاولة مرة اخرى!");
+                            catch (Exception ex){
+                                dismissProgressDialog();
+                                try{
+                                    String msg = response.getString("error");
+                                    String msg2 = response.getString("error_en");
+                                    Toast.makeText(c, msg+"\n\n"+msg2, Toast.LENGTH_LONG).show();
+
+                                }
+                                catch (Exception exp){
+                                    Toast.makeText(c, "حدث خطأ", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
                         }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        dismissProgressDialog();
-                        errorDialog(c,"خطأ في عملية الوصول الى الخادم, الرجاء المحاولة مرة اخرى!");
-                    }
-                }));
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            dismissProgressDialog();
+                            Toast.makeText(c, "حدث خطأ, يرجى المحاولة مجددا", Toast.LENGTH_LONG).show();
+                        }
+                    }));
+
+                } catch (Exception ex){
+                    dismissProgressDialog();
+                    Toast.makeText(c, "حدث خطأ, يرجى المحاولة مجددا", Toast.LENGTH_LONG).show();
+                }
+                
+
             }
 
         }
@@ -179,7 +257,9 @@ public class ClientsViewModel extends ViewModel {
                                 jsonArray.getJSONObject(i).getString("constraint"),
                                 jsonArray.getJSONObject(i).getString("state"),
                                 jsonArray.getJSONObject(i).getString("date_of_register"),
-                                jsonArray.getJSONObject(i).getString("crm_id")
+                                jsonArray.getJSONObject(i).getString("crm_id"),
+                                "0","0","0"
+
                         ));
 
                     }
@@ -227,7 +307,8 @@ public class ClientsViewModel extends ViewModel {
                                 jsonArray.getJSONObject(i).getString("constraint"),
                                 jsonArray.getJSONObject(i).getString("state"),
                                 jsonArray.getJSONObject(i).getString("date_of_register"),
-                                jsonArray.getJSONObject(i).getString("crm_id")
+                                jsonArray.getJSONObject(i).getString("crm_id"),
+                                "0","0","0"
                         ));
                     }
                     listOfClient.setValue(temp);

@@ -51,7 +51,7 @@ public class NewExchangeActivity extends AppCompatActivity {
         edtExchangeAmount = findViewById(R.id.edtExchaneAmount);
         edtNotes = findViewById(R.id.edtNotes);
 
-        getUsers();
+
 
 
         UserViewModel vm = ViewModelProviders.of((FragmentActivity) c).get(UserViewModel.class);
@@ -63,6 +63,7 @@ public class NewExchangeActivity extends AppCompatActivity {
                 String ss ="المستخدم الحالي: "+ UserInfo.getUser(c).getName();
                 ss+="\n"+"ذمم المستخدم: "+dept ;
                 txvInfo.setText(ss);
+                getUsers();
             }
         });
     }

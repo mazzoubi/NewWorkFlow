@@ -15,7 +15,7 @@ public class UserInfo {
         userModel.setToken(sharedPreferences.getString("Token" ,"") );
         userModel.setUsername(sharedPreferences.getString("Username" ,"") );
         userModel.setDebt(sharedPreferences.getString("Debt" ,"") );
-        userModel.setDebt(sharedPreferences.getString("Type" ,"") );
+        userModel.setType(sharedPreferences.getString("Type" ,"") );
 
         return userModel;
     }

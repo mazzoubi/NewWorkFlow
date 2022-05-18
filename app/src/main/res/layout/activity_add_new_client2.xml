@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Clients.AddNewClientActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/tool"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:layout_height="125dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:id="@+id/logo2"
+                app:civ_border_color="@color/colorPrimaryDark"
+                android:src="@mipmap/ic_launcher3"
+                android:layout_height="80dp"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/logo3"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_baseline_exit_to_app_24"
+                android:layout_height="50dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="24dp"
+                android:fontFamily="serif"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff"
+                android:text="فتح نقطة جديدة"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tool"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_back"
+        android:gravity="center"
+        android:hint="إسم النقطة"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/mobile"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/name"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_back"
+        android:gravity="center"
+        android:hint="هاتف النقطة"
+        android:inputType="number"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/mobile"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_back"
+        android:gravity="center"
+        android:hint="إيميل النقطة"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/email"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_back"
+        android:gravity="center"
+        android:hint="كلمة سر المستخدم"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/locat"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/password"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_back"
+        android:gravity="center"
+        android:hint="موقع النقطة"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/passcode"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/locat"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_back"
+        android:gravity="center"
+        android:hint="كود دخول طلباتي"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
+
+    <Spinner
+        android:id="@+id/email2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/passcode"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_back"
+        android:gravity="center"
+        android:hint="المندوب"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email2"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_back3"
+        android:onClick="onClickSave"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="إضافة"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>
